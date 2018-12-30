@@ -1,0 +1,8 @@
+{
+  "title": "recalendar",
+  "description": "리액트 캘린더 컴포넌트. 리액트에서 사용할 수 있는 캘린더 컴포넌트 입니다.",
+  "date": "2018-12-19",
+  "git": "https://github.com/Godsenal/recalendar",
+  "website": "https://godsenal.github.io/recalendar/",
+  "stacks": ["react"]
+}

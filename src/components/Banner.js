@@ -1,0 +1,16 @@
+import React from "react";
+import { css } from "@emotion/core";
+
+const bannerBox = banner => css`
+  background-color: #fefefe;
+  background-image: url(${banner});
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50%;
+  height: 20em;
+  margin: 2rem 0;
+`;
+
+const Banner = ({ banner }) => <div css={bannerBox(banner)} />;
+
+export default Banner;
