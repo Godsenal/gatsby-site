@@ -16,7 +16,7 @@ const Tags = ({ tags, tagsCount, ...props }) => (
     {tags &&
       tags.map(tag => (
         <CustomLink key={tag} css={tagItem} to={`/tags/${tag}`} {...props}>
-          🔖 {tag} {tagsCount && tagsCount[tag]}
+          <span role="img">🔖</span> {tag} {tagsCount && tagsCount[tag]}
         </CustomLink>
       ))}
   </>

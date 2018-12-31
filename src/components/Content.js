@@ -9,6 +9,9 @@ const content = css`
       text-decoration: underline;
     }
   }
+  strong {
+    color: blanchedalmond;
+  }
 `;
 
 const Content = ({ children, ...props }) => (

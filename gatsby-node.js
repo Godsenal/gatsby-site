@@ -1,6 +1,13 @@
 const { createFilePath } = require("gatsby-source-filesystem");
+const algoliasearch = require("algoliasearch");
 const path = require("path");
 const _ = require("lodash");
+
+const algoClient = algoliasearch(
+  "YWOT3IQZET",
+  "ff6098ac75502b4f74da248dd5884ad5"
+);
+const algoIndex = algoClient.initIndex("gatsby_site");
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions;
@@ -29,6 +36,7 @@ exports.createPages = ({ graphql, actions }) => {
         ) {
           edges {
             node {
+              id
               fields {
                 slug
               }
@@ -43,13 +51,22 @@ exports.createPages = ({ graphql, actions }) => {
     `).then(result => {
       const { edges } = result.data.allMarkdownRemark;
       let allTags = [];
+      const searchObjects = [];
+      /* helpers */
+      const addTags = tags => tags && (allTags = _.union(allTags, tags));
+      const addSearchObjects = (id, path, { title }) => {
+        title && searchObjects.push({ objectID: id, title, path });
+      };
       /* create post page */
       edges.forEach(({ node }, i) => {
         const { slug } = node.fields;
         const previous = i === 0 ? null : edges[i - 1].node;
         const next = i === edges.length - 1 ? null : edges[i + 1].node;
-        node.frontmatter.tags &&
-          (allTags = _.union(allTags, node.frontmatter.tags));
+
+        /* will use later */
+        addTags(node.frontmatter.tags);
+        addSearchObjects(node.id, node.fields.slug, node.frontmatter);
+
         createPage({
           path: slug,
           component: postTemplate,
@@ -98,6 +115,8 @@ exports.createPages = ({ graphql, actions }) => {
           }
         });
       });
+      /* create search index */
+      algoIndex.addObjects(searchObjects);
     });
     res();
   });

@@ -1,5 +1,6 @@
 import React from "react";
 import { css } from "@emotion/core";
+import { screen } from "../constants";
 import { Header } from ".";
 
 const main = css`
@@ -12,8 +13,8 @@ const body = css`
   width: 54%;
   margin: auto;
   margin-top: 5%;
-
-  @media screen and (max-width: 760px) {
+  padding-bottom: 3rem;
+  @media screen and (max-width: ${screen.small}px) {
     width: 95%;
   }
 

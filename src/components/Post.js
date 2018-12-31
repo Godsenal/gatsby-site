@@ -24,8 +24,9 @@ const excerptText = css`
 `;
 // -webkit-backface-visibility: hidden;  to handle flickering on hover
 const info = css`
+  margin-top: 2rem;
   color: #fefefe;
-  float: right;
+  text-align: right;
 `;
 
 const Post = ({ frontmatter, fields, excerpt, timeToRead }) => {

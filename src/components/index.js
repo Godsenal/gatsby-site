@@ -9,6 +9,7 @@ import PostList from "./PostList";
 import Profile from "./Profile";
 import Project from "./Project";
 import ProjectList from "./ProjectList";
+import Search from "./Search";
 import Tags from "./Tags";
 import Title from "./Title";
 
@@ -24,6 +25,7 @@ export {
   Profile,
   Project,
   ProjectList,
+  Search,
   Tags,
   Title
 };
