@@ -109,11 +109,14 @@ class Search extends Component {
   };
   render() {
     const { open, searchState, resultsState } = this.props;
+    if (!process.env.ALGOLIA_APP_ID || !process.env.ALGOLIA_SEARCH_KEY) {
+      return null;
+    }
     return (
       <div css={searchContainer(open)} ref={this.wrapper}>
         <InstantSearch
-          appId="YWOT3IQZET"
-          apiKey="ff2853082ab74fa8a7dc75f0a3f2317b"
+          appId={process.env.ALGOLIA_APP_ID}
+          apiKey={process.env.ALGOLIA_SEARCH_KEY}
           indexName="gatsby_site"
         >
           <div css={container}>

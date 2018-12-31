@@ -2,11 +2,12 @@ const { createFilePath } = require("gatsby-source-filesystem");
 const algoliasearch = require("algoliasearch");
 const path = require("path");
 const _ = require("lodash");
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`
+});
 
-const algoClient = algoliasearch(
-  "YWOT3IQZET",
-  "ff6098ac75502b4f74da248dd5884ad5"
-);
+const { ALGOLIA_APP_ID, ALGOLIA_ADMIN_KEY } = process.env;
+const algoClient = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_ADMIN_KEY);
 const algoIndex = algoClient.initIndex("gatsby_site");
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
