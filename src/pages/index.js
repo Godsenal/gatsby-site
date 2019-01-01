@@ -8,7 +8,6 @@ import {
   PostList,
   ProjectList
 } from "../components";
-import "../styles/global.css";
 
 const linkContainer = css`
   width: 100%;
