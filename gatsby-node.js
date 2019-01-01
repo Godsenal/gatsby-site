@@ -6,8 +6,11 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`
 });
 
-const { ALGOLIA_APP_ID, ALGOLIA_ADMIN_KEY } = process.env;
-const algoClient = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_ADMIN_KEY);
+const { GATSBY_ALGOLIA_APP_ID, GATSBY_ALGOLIA_ADMIN_KEY } = process.env;
+const algoClient = algoliasearch(
+  GATSBY_ALGOLIA_APP_ID,
+  GATSBY_ALGOLIA_ADMIN_KEY
+);
 const algoIndex = algoClient.initIndex("gatsby_site");
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
