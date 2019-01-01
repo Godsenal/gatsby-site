@@ -13,9 +13,9 @@ const body = css`
   width: 54%;
   margin: auto;
   margin-top: 5%;
-  padding-bottom: 3rem;
+  padding-bottom: 2rem;
   @media screen and (max-width: ${screen.small}px) {
-    width: 95%;
+    width: 90%;
   }
 
   font-size: 18px;

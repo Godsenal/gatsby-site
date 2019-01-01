@@ -34,7 +34,7 @@ const link = css`
 const mobileFooter = css`
   position: fixed;
   width: 100%;
-  height: 3rem;
+  height: 2rem;
   bottom: 0;
   left: 0;
   box-shadow: 0px -5px 20px rgba(0, 0, 0, 0.3);
@@ -45,6 +45,12 @@ const mobileFooter = css`
   display: flex;
   justify-content: space-around;
   align-items: center;
+
+  font-size: 16px;
+
+  a {
+    margin-right: 0;
+  }
 `;
 const query = graphql`
   query {

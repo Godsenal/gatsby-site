@@ -10,8 +10,13 @@ import {
   Title
 } from "../components";
 
+const prevOrNext = css`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  flex-wrap: wrap;
+`;
 const prevPost = css`
-  float: left;
   transition: transform 0.3s ease-in-out;
   &:hover {
     transform: translateX(-5px);
@@ -19,7 +24,6 @@ const prevPost = css`
   }
 `;
 const nextPost = css`
-  float: right;
   transition: transform 0.3s ease-in-out;
   &:hover {
     transform: translateX(5px);
@@ -44,7 +48,7 @@ const Template = ({ data, pageContext }) => {
         <Link to="/blog">» List</Link>
       </h4>
       <Profile />
-      <div>
+      <div css={prevOrNext}>
         {previous && (
           <Link css={prevPost} to={previous.fields.slug}>
             <h5>« {previous.frontmatter.title}</h5>

@@ -1,5 +1,4 @@
 import React, { createRef, Component } from "react";
-import { Helmet } from "react-helmet";
 import { createInstantSearch } from "react-instantsearch-dom/server";
 import {
   connectStateResults,
@@ -8,7 +7,8 @@ import {
   Highlight
 } from "react-instantsearch-dom";
 import { css } from "@emotion/core";
-import { Layout, Title, CustomLink } from "../components";
+import { CustomLink } from "../components";
+import { screen } from "../constants";
 
 const { InstantSearch, findResultsState } = createInstantSearch();
 
@@ -28,6 +28,15 @@ const searchContainer = open => css`
   z-index: 100;
 
   transition: top 0.3s ease-in-out;
+
+  @media screen and (max-width: ${screen.small}px) {
+    width: 100%;
+    min-height: 80%;
+    margin-top: 0;
+    margin-left: 0;
+    top: ${open ? "0px" : "-1000px"};
+    left: 0;
+  }
 `;
 const container = css`
   width: 100%;
@@ -108,7 +117,7 @@ class Search extends Component {
     }
   };
   render() {
-    const { open, searchState, resultsState } = this.props;
+    const { open } = this.props;
     if (
       !process.env.GATSBY_ALGOLIA_APP_ID ||
       !process.env.GATSBY_ALGOLIA_SEARCH_KEY

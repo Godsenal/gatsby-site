@@ -64,8 +64,8 @@ exports.createPages = ({ graphql, actions }) => {
       /* create post page */
       edges.forEach(({ node }, i) => {
         const { slug } = node.fields;
-        const previous = i === 0 ? null : edges[i - 1].node;
-        const next = i === edges.length - 1 ? null : edges[i + 1].node;
+        const previous = i === edges.length - 1 ? null : edges[i + 1].node;
+        const next = i === 0 ? null : edges[i - 1].node;
 
         /* will use later */
         addTags(node.frontmatter.tags);
