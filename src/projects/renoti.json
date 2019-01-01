@@ -1,0 +1,8 @@
+{
+  "title": "renoti",
+  "description": "리액트 notification 모듈.",
+  "date": "2018-12-21",
+  "git": "https://github.com/Godsenal/renoti",
+  "website": "https://godsenal.github.io/renoti/",
+  "stacks": ["typescript", "react"]
+}

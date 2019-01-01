@@ -1,6 +1,8 @@
 {
   "title": "Owesome Gwent",
-  "description": "hello",
-  "date": "2018-10-10",
-  "stacks": ["react", "typescript", "nodejs"]
+  "description": "Gwent 게임의 카드 정보 확인과 덱 빌딩을 도와주는 사이트입니다.",
+  "date": "2018-10-02",
+  "git": "https://github.com/OwesomeGwent/owesome-gwent",
+  "website": "http://owesomegwent.me",
+  "stacks": ["typescript", "react", "nodejs"]
 }

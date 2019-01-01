@@ -16,7 +16,7 @@
     "@emotion/styled": "^10.0.5",
     "algoliasearch": "^3.32.0",
     "dotenv": "^6.2.0",
-    "gatsby": "^2.0.76",
+    "gatsby": "^2.0.79",
     "gatsby-plugin-emotion": "^4.0.1",
     "gatsby-plugin-react-helmet": "^3.0.5",
     "gatsby-plugin-typography": "^2.2.4",

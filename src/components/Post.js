@@ -7,7 +7,7 @@ const post = css`
   display: block;
   box-sizing: border-box;
   border: none;
-  margin-bottom: 5rem;
+  margin-bottom: 3rem;
   min-height: 120px;
   cursor: pointer;
   transition: transform 0.3s ease-in-out;
