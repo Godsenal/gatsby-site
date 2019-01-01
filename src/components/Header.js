@@ -57,10 +57,13 @@ const query = graphql`
 `;
 class Header extends Component {
   state = {
-    isSmallScreen: window.innerWidth <= screen.small,
+    isSmallScreen: false,
     openSearch: false
   };
   componentDidMount() {
+    this.setState({
+      isSmallScreen: window.innerWidth <= screen.small
+    });
     window.addEventListener("resize", this.handleResize);
   }
   componentWillUnmount() {
