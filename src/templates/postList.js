@@ -1,7 +1,7 @@
 import React from "react";
 import { graphql } from "gatsby";
 import { css } from "@emotion/core";
-import { CustomLink, Title, Layout, PostList } from "../components";
+import { HEAD, CustomLink, Title, Layout, PostList } from "../components";
 
 const action = css`
   width: 100%;
@@ -11,11 +11,12 @@ const action = css`
   margin-bottom: 5rem;
 `;
 
-const Template = ({ data, pageContext }) => {
+const Template = ({ data, pageContext, location }) => {
   const { edges } = data.allMarkdownRemark;
   const { previous, next } = pageContext;
   return (
     <Layout>
+      <HEAD pathname={location.pathname} />
       <Title h1="Blog" />
       <PostList edges={edges} />
       <div css={action}>

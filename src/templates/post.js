@@ -4,6 +4,7 @@ import { css } from "@emotion/core";
 import {
   Banner,
   Content,
+  HEAD,
   Layout,
   PostInfo,
   Profile,
@@ -33,13 +34,14 @@ const nextPost = css`
 const listContainer = css`
   text-align: right;
 `;
-const Template = ({ data, pageContext }) => {
+const Template = ({ data, pageContext, location }) => {
   const { markdownRemark } = data;
   const { title, date, banner, tags } = markdownRemark.frontmatter;
   const { html, timeToRead } = markdownRemark;
   const { previous, next } = pageContext;
   return (
     <Layout>
+      <HEAD title={title} pathname={location.pathname} />
       <Title h1={title} />
       <PostInfo date={date} timeToRead={timeToRead} tags={tags} />
       {banner && <Banner banner={banner} />}

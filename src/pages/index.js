@@ -3,6 +3,7 @@ import { graphql } from "gatsby";
 import { css } from "@emotion/core";
 import {
   CustomLink,
+  HEAD,
   Title,
   Layout,
   PostList,
@@ -22,6 +23,7 @@ export default ({ data }) => {
   const { edges: projectEdges } = data.projects;
   return (
     <Layout>
+      <HEAD />
       <Title
         h1="Godsenal's site"
         body="안녕하세요. 이태희입니다. 공부하며 배우는 것들을 작성 중입니다."

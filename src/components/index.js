@@ -1,6 +1,7 @@
 import Banner from "./Banner";
 import Content from "./Content";
 import CustomLink from "./CustomLink";
+import HEAD from "./HEAD";
 import Header from "./Header";
 import Layout from "./Layout";
 import Post from "./Post";
@@ -17,6 +18,7 @@ export {
   Banner,
   Content,
   CustomLink,
+  HEAD,
   Header,
   Layout,
   Post,

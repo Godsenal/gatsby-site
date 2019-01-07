@@ -1,11 +1,12 @@
 import React from "react";
 import { graphql } from "gatsby";
-import { Title, Layout, ProjectList } from "../components";
+import { HEAD, Title, Layout, ProjectList } from "../components";
 
-export default ({ data }) => {
+export default ({ data, location }) => {
   const { edges } = data.allProjectsJson;
   return (
     <Layout>
+      <HEAD pathname={location.pathname} />
       <Title h1="Project" />
       <ProjectList edges={edges} />
     </Layout>

@@ -1,11 +1,12 @@
 import React from "react";
 import { graphql } from "gatsby";
-import { Title, Layout, Profile, Content } from "../components";
+import { HEAD, Title, Layout, Profile, Content } from "../components";
 
-export default ({ data }) => {
+export default ({ data, location }) => {
   const { repository } = data.site.siteMetadata;
   return (
     <Layout>
+      <HEAD pathname={location.pathname} />
       <Title h1="About" />
       <Content>
         <p style={{ textAlign: "center" }}>
