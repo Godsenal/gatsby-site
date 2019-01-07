@@ -1,6 +1,7 @@
 import Banner from "./Banner";
 import Content from "./Content";
 import CustomLink from "./CustomLink";
+import Disqus from "./Disqus";
 import HEAD from "./HEAD";
 import Header from "./Header";
 import Layout from "./Layout";
@@ -18,6 +19,7 @@ export {
   Banner,
   Content,
   CustomLink,
+  Disqus,
   HEAD,
   Header,
   Layout,

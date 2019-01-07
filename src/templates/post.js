@@ -4,6 +4,7 @@ import { css } from "@emotion/core";
 import {
   Banner,
   Content,
+  Disqus,
   HEAD,
   Layout,
   PostInfo,
@@ -37,7 +38,7 @@ const listContainer = css`
 const Template = ({ data, pageContext, location }) => {
   const { markdownRemark } = data;
   const { title, date, banner, tags } = markdownRemark.frontmatter;
-  const { html, timeToRead } = markdownRemark;
+  const { id, html, timeToRead } = markdownRemark;
   const { previous, next } = pageContext;
   return (
     <Layout>
@@ -50,6 +51,7 @@ const Template = ({ data, pageContext, location }) => {
         <Link to="/blog">» List</Link>
       </h4>
       <Profile />
+      <Disqus id={id} url={location.href} />
       <div css={prevOrNext}>
         {previous && (
           <Link css={prevPost} to={previous.fields.slug}>
@@ -71,6 +73,7 @@ export default Template;
 export const query = graphql`
   query($slug: String!) {
     markdownRemark(fields: { slug: { eq: $slug } }) {
+      id
       html
       timeToRead
       frontmatter {
