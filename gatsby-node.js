@@ -61,7 +61,10 @@ exports.createPages = ({ graphql, actions }) => {
       const addSearchObjects = (id, path, { title }) => {
         title && searchObjects.push({ objectID: id, title, path });
       };
-      /* create post page */
+      /*
+        create post page
+        latest page's index is 0!
+      */
       edges.forEach(({ node }, i) => {
         const { slug } = node.fields;
         const previous = i === edges.length - 1 ? null : edges[i + 1].node;

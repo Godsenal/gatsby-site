@@ -22,3 +22,6 @@ blockquote:before {
 blockquote:not(:first-of-type) {
   margin-top: 0.5em;
 }
+:not(pre) > code {
+  color: #e78c45 !important;
+}

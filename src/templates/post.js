@@ -51,7 +51,6 @@ const Template = ({ data, pageContext, location }) => {
         <Link to="/blog">» List</Link>
       </h4>
       <Profile />
-      <Disqus id={id} url={location.href} />
       <div css={prevOrNext}>
         {previous && (
           <Link css={prevPost} to={previous.fields.slug}>
@@ -64,6 +63,7 @@ const Template = ({ data, pageContext, location }) => {
           </Link>
         )}
       </div>
+      <Disqus id={id} url={location.href} />
     </Layout>
   );
 };
