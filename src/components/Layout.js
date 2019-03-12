@@ -10,15 +10,16 @@ const header = css`
   width: 100%;
 `;
 const body = css`
-  width: 54%;
+  width: 40%;
+  min-width: ${screen.small}px;
   margin: auto;
   margin-top: 5%;
   padding-bottom: 2rem;
   @media screen and (max-width: ${screen.small}px) {
     width: 90%;
+    min-width: 0px;
   }
-
-  font-size: 18px;
+  font-size: 1rem;
 `;
 
 const Layout = ({ children }) => (

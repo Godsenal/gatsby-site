@@ -1,26 +1,26 @@
 import Typography from "typography";
 
-const typography = new Typography({
-  baseFontSize: "22px",
-  headerWeight: 700,
-  headerColor: "#fb7da7",
-  headerFontFamily: ["Merriweather", "Noto Sans KR"],
-  bodyFontFamily: ["Ubuntu", "Noto Sans KR"],
+const Theme = {
+  baseFontSize: 18,
+  baseLineHeight: 1.78,
   bodyColor: "#fefefe",
+  headerColor: "#fb7da7",
+  headerFontFamily: ["Open Sans", "Noto Sans KR", "sans-serif"],
+  bodyFontFamily: ["Merriweather", "Noto Sans KR", "serif"],
   googleFonts: [
-    {
-      name: "Merriweather",
-      styles: ["400", "400i", "700", "700i"]
-    },
-    {
-      name: "Noto Sans KR",
-      styles: ["400", "400i", "700", "700i"]
-    },
-    {
-      name: "Ubuntu",
-      styles: ["400", "400i", "700", "700i"]
-    }
-  ]
-});
+    { name: "Open Sans", styles: ["700", "700i"] },
+    { name: "Noto Sans KR", styles: ["300", "300", "700", "700i"] },
+    { name: "Merriweather", styles: ["300", "300", "700", "700i"] }
+  ],
+  headerWeight: 700,
+  bodyWeight: 300,
+  boldWeight: 700
+};
+
+const typography = new Typography(Theme);
+// 개발 모드 hot reload
+if (process.env.NODE_ENV !== "production") {
+  typography.injectStyles();
+}
 
 export default typography;

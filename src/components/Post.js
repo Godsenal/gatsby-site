@@ -35,7 +35,7 @@ const Post = ({ frontmatter, fields, excerpt, timeToRead }) => {
   return (
     <Link css={post} to={slug}>
       {banner && <Banner banner={banner} />}
-      <h5>{title}</h5>
+      <h3>{title}</h3>
       <div css={excerptText} dangerouslySetInnerHTML={{ __html: excerpt }} />
       <div css={info}>
         <PostInfo date={date} timeToRead={timeToRead} />

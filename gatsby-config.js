@@ -21,6 +21,21 @@ module.exports = {
         pathToConfigModule: `src/utils/typography.js`
       }
     },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Godsenal`,
+        short_name: `Godsenal`,
+        start_url: `/`,
+        background_color: `#1f1f1f`,
+        theme_color: `#fb7da7`,
+        // Enables "Add to Homescreen" prompt and disables browser UI (including back button)
+        // see https://developers.google.com/web/fundamentals/web-app-manifest/#display
+        display: `minimal-ui`,
+        icon: `src/images/icon.png`, // This path is relative to the root of the site.
+        include_favicon: true // Include favicon
+      }
+    },
     `gatsby-transformer-json`,
     {
       resolve: `gatsby-transformer-remark`,
