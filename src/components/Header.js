@@ -7,6 +7,7 @@ import { Search } from ".";
 const header = css`
   padding: 10px;
   font-weight: 600;
+  font-size: 1.3rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   display: flex;
 `;
