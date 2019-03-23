@@ -27,8 +27,6 @@ module.exports = {
         name: `Godsenal`,
         short_name: `Godsenal`,
         start_url: `/`,
-        background_color: `#1f1f1f`,
-        theme_color: `#fb7da7`,
         // Enables "Add to Homescreen" prompt and disables browser UI (including back button)
         // see https://developers.google.com/web/fundamentals/web-app-manifest/#display
         display: `minimal-ui`,
