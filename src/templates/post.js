@@ -81,6 +81,7 @@ export const query = graphql`
         date
         banner
         tags
+        categories
       }
     }
   }

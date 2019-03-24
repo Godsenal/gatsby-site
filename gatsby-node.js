@@ -30,7 +30,11 @@ exports.createPages = ({ graphql, actions }) => {
   const postTemplate = path.resolve("src/templates/post.js");
   const postListTemplate = path.resolve("src/templates/postList.js");
   const postTagListTemplate = path.resolve("src/templates/postTagList.js");
+  const postCategoryListTemplate = path.resolve(
+    "src/templates/postCategoryList.js"
+  );
   const tagListTemplate = path.resolve("src/templates/tagList.js");
+  const categoryListTemplate = path.resolve("src/templates/categoryList.js");
   return new Promise((res, rej) => {
     graphql(`
       {
@@ -47,6 +51,7 @@ exports.createPages = ({ graphql, actions }) => {
               frontmatter {
                 title
                 tags
+                categories
               }
             }
           }
@@ -55,9 +60,13 @@ exports.createPages = ({ graphql, actions }) => {
     `).then(result => {
       const { edges } = result.data.allMarkdownRemark;
       let allTags = [];
+      let allCategories = new Set();
       const searchObjects = [];
       /* helpers */
       const addTags = tags => tags && (allTags = _.union(allTags, tags));
+      const addCategories = categories =>
+        categories &&
+        categories.forEach(category => allCategories.add(category));
       const addSearchObjects = (id, path, { title }) => {
         title && searchObjects.push({ objectID: id, title, path });
       };
@@ -71,8 +80,9 @@ exports.createPages = ({ graphql, actions }) => {
         const next = i === 0 ? null : edges[i - 1].node;
 
         /* will use later */
-        addTags(node.frontmatter.tags);
-        addSearchObjects(node.id, node.fields.slug, node.frontmatter);
+        addTags(node.frontmatter.tags); // 태그 추가
+        addCategories(node.frontmatter.categories); // 카테고리 추가
+        addSearchObjects(node.id, node.fields.slug, node.frontmatter); // Algoria 검색 대상 추가
 
         createPage({
           path: slug,
@@ -119,6 +129,24 @@ exports.createPages = ({ graphql, actions }) => {
           component: postTagListTemplate,
           context: {
             tag
+          }
+        });
+      });
+      /* create category list page */
+      createPage({
+        path: `/categories`,
+        component: categoryListTemplate,
+        context: {
+          categories: [...allCategories]
+        }
+      });
+      allCategories.forEach(category => {
+        const path = `/categories/${category}`;
+        createPage({
+          path,
+          component: postCategoryListTemplate,
+          context: {
+            category
           }
         });
       });

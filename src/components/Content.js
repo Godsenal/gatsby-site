@@ -3,7 +3,7 @@ import { css } from "@emotion/core";
 
 const content = css`
   margin-top: 2rem;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   @media screen and (max-width: 992px) {
     font-size: 0.9rem;
   }

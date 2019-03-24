@@ -14,7 +14,7 @@ export default ({ data, pageContext }) => {
   });
   return (
     <Layout>
-      <Title h1="Tags" />
+      <Title h2="Tags" />
       <Tags tags={tags} tagsCount={tagsCount} />
     </Layout>
   );

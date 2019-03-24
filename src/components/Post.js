@@ -31,14 +31,14 @@ const info = css`
 
 const Post = ({ frontmatter, fields, excerpt, timeToRead }) => {
   const { slug } = fields;
-  const { title, date, banner } = frontmatter;
+  const { title, date, banner, tags } = frontmatter;
   return (
     <Link css={post} to={slug}>
       {banner && <Banner banner={banner} />}
       <h3>{title}</h3>
       <div css={excerptText} dangerouslySetInnerHTML={{ __html: excerpt }} />
       <div css={info}>
-        <PostInfo date={date} timeToRead={timeToRead} />
+        <PostInfo date={date} timeToRead={timeToRead} tags={tags} />
       </div>
     </Link>
   );

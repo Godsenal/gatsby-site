@@ -17,7 +17,7 @@ const Template = ({ data, pageContext, location }) => {
   return (
     <Layout>
       <HEAD pathname={location.pathname} />
-      <Title h1="Blog" />
+      <Title h2="Blog" />
       <PostList edges={edges} />
       <div css={action}>
         {previous && <CustomLink to={previous}>Previous</CustomLink>}
@@ -41,12 +41,14 @@ export const query = graphql`
           fields {
             slug
           }
-          excerpt
+          excerpt(truncate: true)
           timeToRead
           frontmatter {
             title
             date
             banner
+            tags
+            categories
           }
         }
       }

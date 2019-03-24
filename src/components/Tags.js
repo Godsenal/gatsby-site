@@ -2,24 +2,30 @@ import React from "react";
 import { css } from "@emotion/core";
 import { CustomLink } from ".";
 
+const container = css`
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: left;
+  justify-content: flex-end;
+`;
 const tagItem = css`
-  display: inline-block;
   box-sizing: border-box;
-  padding: 10px;
   margin: 10px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #838383;
 `;
 
 const Tags = ({ tags, tagsCount, ...props }) => (
-  <>
+  <div css={container}>
     {tags &&
       tags.map(tag => (
         <CustomLink key={tag} css={tagItem} to={`/tags/${tag}`} {...props}>
-          <span role="img">🔖</span> {tag} {tagsCount && tagsCount[tag]}
+          # {tag} {tagsCount && tagsCount[tag]}
         </CustomLink>
       ))}
-  </>
+  </div>
 );
 
 export default Tags;

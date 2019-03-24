@@ -10,7 +10,7 @@ const header = css`
   width: 100%;
 `;
 const body = css`
-  width: 50%;
+  width: 40%;
   min-width: ${screen.small}px;
   margin: auto;
   margin-top: 5%;

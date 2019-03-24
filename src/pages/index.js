@@ -1,7 +1,7 @@
 import React from "react";
-import { graphql } from "gatsby";
 import { css } from "@emotion/core";
 import {
+  Avatar,
   CustomLink,
   HEAD,
   Title,
@@ -9,7 +9,19 @@ import {
   PostList,
   ProjectList
 } from "../components";
+import { screen } from "../constants";
 
+const mainTitle = css`
+  margin-bottom: 2rem;
+`;
+const avatarImg = css`
+  float: right;
+  @media screen and (max-width: ${screen.small}px) {
+    width: 64px;
+    height: 64px;
+    float: initial;
+  }
+`;
 const linkContainer = css`
   width: 100%;
   margin: 2rem 0;
@@ -24,10 +36,14 @@ export default ({ data }) => {
   return (
     <Layout>
       <HEAD />
-      <Title
-        h1="Godsenal's site"
-        body="안녕하세요. 이태희입니다. 공부하며 배우는 것들을 작성 중입니다."
-      />
+      <Avatar css={avatarImg} />
+      <div css={mainTitle}>
+        <h1>Godsenal's site</h1>
+        <p>
+          안녕하세요. 이태희입니다. <br />
+          공부하며 배우는 것들을 작성 중입니다.
+        </p>
+      </div>
       <CustomLink to="/blog">
         <Title h2="Blogs" />
       </CustomLink>
@@ -58,7 +74,7 @@ export const query = graphql`
     ) {
       edges {
         node {
-          excerpt
+          excerpt(truncate: true)
           timeToRead
           fields {
             slug

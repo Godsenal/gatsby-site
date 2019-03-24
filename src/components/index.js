@@ -1,4 +1,6 @@
+import Avatar from "./Avatar";
 import Banner from "./Banner";
+import Categories from "./Categories";
 import Content from "./Content";
 import CustomLink from "./CustomLink";
 import Disqus from "./Disqus";
@@ -12,11 +14,14 @@ import Profile from "./Profile";
 import Project from "./Project";
 import ProjectList from "./ProjectList";
 import Search from "./Search";
+import SimplePost from "./SimplePost";
 import Tags from "./Tags";
 import Title from "./Title";
 
 export {
+  Avatar,
   Banner,
+  Categories,
   Content,
   CustomLink,
   Disqus,
@@ -30,6 +35,7 @@ export {
   Project,
   ProjectList,
   Search,
+  SimplePost,
   Tags,
   Title
 };

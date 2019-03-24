@@ -7,7 +7,7 @@ export default ({ data, location }) => {
   return (
     <Layout>
       <HEAD pathname={location.pathname} />
-      <Title h1="Project" />
+      <Title h2="Project" />
       <ProjectList edges={edges} />
     </Layout>
   );

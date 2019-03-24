@@ -1,13 +1,13 @@
 import React from "react";
 import { graphql } from "gatsby";
-import { HEAD, Title, Layout, Profile, Content } from "../components";
+import { Avatar, HEAD, Title, Layout, Profile, Content } from "../components";
 
 export default ({ data, location }) => {
   const { repository } = data.site.siteMetadata;
   return (
     <Layout>
       <HEAD pathname={location.pathname} />
-      <Title h1="About" />
+      <Title h2="About" />
       <Content>
         <p style={{ textAlign: "center" }}>
           안녕하세요. Godsenal 입니다.

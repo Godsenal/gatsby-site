@@ -64,7 +64,7 @@ const query = graphql`
 `;
 class Header extends Component {
   state = {
-    isSmallScreen: false,
+    isSmallScreen: window.innerWidth <= screen.small,
     openSearch: false
   };
   componentDidMount() {
@@ -105,6 +105,9 @@ class Header extends Component {
       </Link>
       <Link to="/project" css={link}>
         Project
+      </Link>
+      <Link to="/categories" css={link}>
+        Categories
       </Link>
       <Link to="/tags" css={link}>
         Tags

@@ -2,10 +2,9 @@ import React from "react";
 import { css } from "@emotion/core";
 import { Tags } from ".";
 const info = css`
-  font-size: 0.7em;
+  font-size: 0.8rem;
   text-align: right;
   color: #fefefe;
-  margin-bottom: 0.5rem;
 `;
 const tagList = css`
   margin-right: 0;
@@ -13,12 +12,12 @@ const tagList = css`
 const PostInfo = ({ timeToRead, date, tags }) => (
   <>
     {tags && (
-      <h5 css={info}>
+      <div css={info}>
         <Tags tags={tags} css={tagList} />
-      </h5>
+      </div>
     )}
-    <h5 css={info}>⌛{timeToRead} min read</h5>
-    <h5 css={info}>» {date}</h5>
+    <div css={info}>⌛{timeToRead} min read</div>
+    <div css={info}>» {date}</div>
   </>
 );
 

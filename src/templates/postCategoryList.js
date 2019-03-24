@@ -4,10 +4,10 @@ import { Title, Layout, PostList } from "../components";
 
 const Template = ({ data, pageContext }) => {
   const { edges } = data.allMarkdownRemark;
-  const { tag } = pageContext;
+  const { category } = pageContext;
   return (
     <Layout>
-      <Title h2={`tag: ${tag}`} />
+      <Title h2={`category: ${category}`} />
       <PostList edges={edges} simple />
     </Layout>
   );
@@ -16,10 +16,10 @@ const Template = ({ data, pageContext }) => {
 export default Template;
 
 export const query = graphql`
-  query postTagList($tag: String!) {
+  query postCategoryList($category: String!) {
     allMarkdownRemark(
       sort: { order: DESC, fields: [frontmatter___date] }
-      filter: { frontmatter: { tags: { eq: $tag } } }
+      filter: { frontmatter: { categories: { eq: $category } } }
     ) {
       edges {
         node {
