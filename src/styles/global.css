@@ -8,7 +8,7 @@ a {
   outline: none;
 }
 p {
-  word-break: break-all;
+  word-break: break-word;
 }
 blockquote {
   background-color: #2d303d;
