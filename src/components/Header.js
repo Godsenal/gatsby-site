@@ -2,17 +2,18 @@ import React, { Component } from "react";
 import { css } from "@emotion/core";
 import { graphql, StaticQuery, Link } from "gatsby";
 import { screen } from "../constants";
-import { Search } from ".";
+import { CustomLink, Search } from ".";
 
 const header = css`
-  padding: 10px;
-  font-weight: 600;
-  font-size: 1.3rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 20px 30px;
+  font-size: 1rem;
   display: flex;
+  align-items: center;
 `;
 const logo = css`
   flex: 0;
+  font-size: 1.3rem;
+  font-weight: 400;
   cursor: pointer;
   h5 {
     margin: 0;
@@ -27,7 +28,6 @@ const icon = css`
   outline: none;
   background-color: inherit;
   cursor: pointer;
-  margin-right: 20px;
 `;
 const link = css`
   margin-right: 20px;
@@ -40,7 +40,7 @@ const mobileFooter = css`
   left: 0;
   box-shadow: 0px -5px 20px rgba(0, 0, 0, 0.3);
 
-  background-color: #1f1f1f;
+  background-color: #282c35;
   z-index: 99;
 
   display: flex;
@@ -100,21 +100,21 @@ class Header extends Component {
   };
   renderLinks = () => (
     <>
-      <Link to="/blog" css={link}>
+      <CustomLink to="/blog" css={link}>
         Blog
-      </Link>
-      <Link to="/project" css={link}>
+      </CustomLink>
+      <CustomLink to="/project" css={link}>
         Project
-      </Link>
-      <Link to="/categories" css={link}>
+      </CustomLink>
+      <CustomLink to="/categories" css={link}>
         Categories
-      </Link>
-      <Link to="/tags" css={link}>
+      </CustomLink>
+      <CustomLink to="/tags" css={link}>
         Tags
-      </Link>
-      <Link to="/about" css={link}>
+      </CustomLink>
+      <CustomLink to="/about" css={link}>
         About
-      </Link>
+      </CustomLink>
     </>
   );
   render() {
@@ -129,14 +129,11 @@ class Header extends Component {
           return (
             <div css={header}>
               <div css={logo}>
-                <Link to="/" css={link}>
+                <CustomLink to="/" css={link}>
                   {title}
-                </Link>
+                </CustomLink>
               </div>
               <div css={menu}>
-                <button css={icon} onClick={this.handleOpenSearch}>
-                  <span role="img">🔍</span>
-                </button>
                 {isSmallScreen ? (
                   <div css={mobileFooter}>{this.renderLinks()}</div>
                 ) : (
@@ -144,6 +141,9 @@ class Header extends Component {
                 )}
                 <div />
               </div>
+              <button css={icon} onClick={this.handleOpenSearch}>
+                <span role="img">🔍</span>
+              </button>
               <Search open={openSearch} handleClose={this.handleCloseSearch} />
             </div>
           );

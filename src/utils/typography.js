@@ -4,17 +4,17 @@ const Theme = {
   baseFontSize: 18,
   baseLineHeight: 1.75,
   bodyColor: "#fefefe",
-  headerColor: "#fb7da7",
-  headerFontFamily: ["Noto Serif KR", "sans-serif"],
-  bodyFontFamily: ["Merriweather", "Noto Serif KR", "serif"],
+  headerColor: "#FFA7C4",
+  headerFontFamily: ["Roboto", "Noto Sans KR", "sans-serif"],
+  bodyFontFamily: ["Roboto", "Noto Sans KR", "serif"],
   googleFonts: [
     { name: "Open Sans", styles: ["700", "700i"] },
-    { name: "Noto Serif KR", styles: ["300", "300", "700", "700i"] },
-    { name: "Merriweather", styles: ["300", "300", "700", "700i"] }
+    { name: "Noto Sans KR", styles: ["300", "300", "500", "500"] },
+    { name: "Roboto", styles: ["300", "300", "500", "500"] }
   ],
-  headerWeight: 700,
+  headerWeight: 300,
   bodyWeight: 300,
-  boldWeight: 700,
+  boldWeight: 500,
   includeNormalize: true,
   overrideStyles: () => ({
     code: {

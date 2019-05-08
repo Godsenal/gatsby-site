@@ -1,6 +1,19 @@
 body {
-  background-color: #1f1f1f;
+  background-color: #282c35;
   -webkit-font-smoothing: antialiased;
+}
+h1 {
+  font-size: 1.6rem;
+}
+h2 {
+  font-size: 1.4rem;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  line-height: 40pt;
 }
 a {
   color: inherit;

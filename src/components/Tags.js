@@ -10,11 +10,13 @@ const container = css`
   justify-content: flex-end;
 `;
 const tagItem = css`
+  color: #3a4570;
   box-sizing: border-box;
   margin: 10px;
   padding: 5px;
   border-radius: 5px;
-  background-color: #838383;
+  background-color: #dfe2ee;
+  font-weight: 500;
 `;
 
 const Tags = ({ tags, tagsCount, ...props }) => (

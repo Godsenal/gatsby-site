@@ -14,24 +14,21 @@ const { InstantSearch, findResultsState } = createInstantSearch();
 
 const searchContainer = open => css`
   position: fixed;
-  top: ${open ? "50%" : "-1000px"};
+  top: 200px;
   left: 50%;
-  margin-top: -250px;
-  margin-left: -200px;
-  width: 450px;
-  min-height: 500px;
+  margin-left: -400px;
+  width: 800px;
   padding: 20px;
   box-shadow: 0 3px 20px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
   background-color: #1f1f1f;
 
-  z-index: 100;
+  z-index: 105;
 
   transition: top 0.3s ease-in-out;
 
   @media screen and (max-width: ${screen.small}px) {
     width: 100%;
-    min-height: 80%;
     margin-top: 0;
     margin-left: 0;
     top: ${open ? "0px" : "-1000px"};
@@ -40,17 +37,16 @@ const searchContainer = open => css`
 `;
 const container = css`
   width: 100%;
-  height: 500px;
 `;
 const searchBox = css`
-  width: 95%;
-  height: 20%;
+  width: 100%;
   margin: auto;
   form {
+    width: 100%;
     display: flex;
-    justify-content: space-between;
   }
   input {
+    width: 90%;
     outline: none;
     border: none;
     border-bottom: 1px solid #ccc;
@@ -61,13 +57,15 @@ const searchBox = css`
     color: #fefefe;
     border: none;
     outline: none;
-    border-radius: 5px;
-    background-color: #fefefe;
+    background-color: transparent;
+    svg {
+      fill: #fefefe;
+    }
   }
 `;
 const hitList = css`
   overflow-y: auto;
-  height: 80%;
+  max-height: 500px;
   ul {
     margin: 0;
   }
@@ -124,6 +122,7 @@ class Search extends Component {
     ) {
       return null;
     }
+    if (!open) return null;
     return (
       <div css={searchContainer(open)} ref={this.wrapper}>
         <InstantSearch
@@ -133,7 +132,7 @@ class Search extends Component {
         >
           <div css={container}>
             <div css={searchBox}>
-              <SearchBox />
+              <SearchBox autoFocus />
             </div>
             <SearchResults>
               <div css={hitList}>

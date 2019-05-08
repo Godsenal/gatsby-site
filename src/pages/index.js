@@ -12,7 +12,7 @@ import {
 import { screen } from "../constants";
 
 const mainTitle = css`
-  margin-bottom: 2rem;
+  margin-bottom: 100px;
 `;
 const avatarImg = css`
   float: right;
@@ -53,6 +53,7 @@ export default ({ data }) => {
           » Read more on blog posts
         </CustomLink>
       </div>
+
       <CustomLink to="/project">
         <Title h2="Projects" />
       </CustomLink>
