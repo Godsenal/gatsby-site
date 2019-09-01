@@ -21,7 +21,7 @@ Redux를 사용할 때 액션의 타입에 따라 리듀서에서 분기되어�
 
 typescript 3.4에서 `as const` 구문이 나옴에 따라서 타이핑이 많이 편해졌다. 리듀서에서 액션타입의 string 값에 따라 분기를 해줘야하는데, 기존에는 string으로 값을 정해주고, 타입을 따로 지정해주어야 했다.
 
-```ts
+```tsx
 // 액션 타입
 const INCREASE = "INCREASE";
 // 액션 크리에이터
@@ -33,7 +33,7 @@ const increase = (): INCREASE => ({ type: INCREASE });
 
 `as const`를 이용하면 따로 타입을 지정해줄 필요없이 typescript의 유틸리티 중 하나인 `ReturnType`을 이용해 타입을 추론할 수 있다.
 
-```ts
+```tsx
 // 액션 타입
 const INCREASE = "INCREASE" as const;
 // 액션 크리에이터
@@ -43,7 +43,7 @@ type Increase = ReturnType<typeof increase>;
 
 리듀서로 들어오는 액션의 타입도 지정해주어야 하므로 여러 액션이 있을 때, 이 액션들을 모아 유니온 타입으로 만들어주어야 한다.
 
-```ts
+```tsx
 const INCREASE = "INCREASE" as const;
 const DECREASE = "DECREASE" as const;
 
@@ -58,7 +58,7 @@ type Actions = Increase | Decrease;
 
 그리고 리듀서를 다음과 같이 만들면 타이핑에 따른 분기가 잘 되는 것을 볼 수 있다.
 
-```ts
+```tsx
 type State = {
   count: number;
 }
@@ -81,7 +81,7 @@ const reducer = (state: State, action: Actions) => {
 
 여기까지는 괜찮았는데, 비동기 작업이 조금 골치아팠다. 보통 비동기 작업에 대한 요청/성공/실패 3가지 액션에 대해 모두 타이핑을 해주는 것이 코드 크기를 많이 키우는 주 원인이었다. 이를 좀 편하게 하기위해 다음과 같은 유틸리티 함수를 만들었다.
 
-```ts
+```tsx
 // 비동기 액션 타입들
 const ASYNC_REQUEST = "ASYNC_REQUEST" as const;
 const ASYNC_SUCCESS = "ASYNC_SUCCESS" as const;
@@ -108,7 +108,7 @@ const asyncActions = createAsyncActions(
 
 이런식으로 이 유틸리티를 만들어 놓고 비동기 액션에 사용하면 더욱 편해진다. 유니온타입의 액션을 만들때도,
 
-```ts
+```tsx
 type ActionTypes<
   T extends { [K in keyof T]: (...args: any[]) => any }
 > = ReturnType<T[keyof T]>;
@@ -121,7 +121,7 @@ type Actions = ActionTypes<typeof asyncActions>;
 
 대부분의 비동기 액션들은 Api 요청과 관련된 것이므로, 그러한 요청들은 Api 타입에 맞춰서 타이핑을 하는 것이 좋다. 이전에 방식은 각각 비동기 액션의 인자들을 제네릭에 직접 넣어주는 방식이였다면, 이 방식은 그 인자들을 Api로 부터 추출하는 방법이다.
 
-```ts
+```tsx
 // 비동기 액션 타입들
 const LOGIN_REQUEST = "LOGIN_REQUEST" as const;
 const LOGIN_SUCCESS = "LOGIN_SUCCESS" as const;
@@ -180,7 +180,7 @@ function* fetchEntity(entity, apiFn, ...params) {
 먼저 `entity`는 아까 만들었던 요청/성공/실패에 해당하는 액션 크리에이터가 들어있는 객체라고 할 수 있다.
 `params`의 타입은 아까와 같이 Api로 부터 추출할 수 있다. Api를 요청할 때 넣어줄 인자들이 `...params`이므로 `apiFn`에 대한 인자를 제네릭으로 받아서 처리해주자.
 
-```ts
+```tsx
 export const fetchEntity = <
   R extends Function,
   S extends Function,
@@ -207,7 +207,7 @@ export const fetchEntity = <
 
 위에서 한 내용들을 전부 합쳐서 사가에서 사용할 때는 이런식으로 사용해줄 수 있다.
 
-```ts
+```tsx
 // 로그인 API
 const login = async (form: { username: string; password: string }) =>
   await axios.post<{ data: LoginResponse }>("myloginapi", form);
@@ -230,7 +230,7 @@ function* user() {
 
 여기까지도 만족스럽지만, 사가에 대한 요청과 Api에 대한 요청을 구분해놓으면 더 좋다. 컴포넌트 내에서 디스패치하는 데이터와 실제 Api 인자로 보내는 데이터가 달라야 하는 경우가 꽤 있다. 위 `redux-saga`의 [real-world-example](https://github.com/redux-saga/redux-saga/blob/master/examples/real-world/sagas/index.js) 처럼 Api 인자로 보낼 데이터를 전처리하거나 Api를 호출할지 말지 결정하는 과정을 사가내에서 편하게 할 수 있다.
 
-```ts
+```tsx
 const loginAction = (user: User) => ({ type: LOGIN, payload: user });
 
 // 위에서 만든 로그인에 대한 액션 크리에이터들
