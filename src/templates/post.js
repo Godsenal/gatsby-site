@@ -38,11 +38,12 @@ const listContainer = css`
 const Template = ({ data, pageContext, location }) => {
   const { markdownRemark } = data;
   const { title, date, banner, tags } = markdownRemark.frontmatter;
-  const { id, html, timeToRead } = markdownRemark;
+  const { id, html, timeToRead, excerpt } = markdownRemark;
   const { previous, next } = pageContext;
+
   return (
     <Layout>
-      <HEAD title={title} pathname={location.pathname} />
+      <HEAD title={title} pathname={location.pathname} description={excerpt} />
       <Title h1={title} />
       <PostInfo date={date} timeToRead={timeToRead} tags={tags} />
       {banner && <Banner banner={banner} />}
@@ -76,6 +77,7 @@ export const query = graphql`
       id
       html
       timeToRead
+      excerpt(truncate: true)
       frontmatter {
         title
         date
