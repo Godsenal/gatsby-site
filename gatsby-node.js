@@ -151,7 +151,7 @@ exports.createPages = ({ graphql, actions }) => {
         });
       });
       /* create search index */
-      algoIndex.addObjects(searchObjects);
+      algoIndex.saveObjects(searchObjects);
     });
     res();
   });

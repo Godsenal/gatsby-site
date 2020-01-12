@@ -1,16 +1,15 @@
 import React, { createRef, Component } from "react";
-import { createInstantSearch } from "react-instantsearch-dom/server";
 import {
+  InstantSearch,
   connectStateResults,
   SearchBox,
   Hits,
   Highlight
 } from "react-instantsearch-dom";
 import { css } from "@emotion/core";
+import algoliasearch from "algoliasearch/lite";
 import { CustomLink } from "../components";
 import { screen } from "../constants";
-
-const { InstantSearch, findResultsState } = createInstantSearch();
 
 const searchContainer = open => css`
   position: fixed;
@@ -88,7 +87,8 @@ const Post = ({ hit }) => (
 );
 const SearchResults = connectStateResults(
   ({ searchState, searchResults, children }) => {
-    if (!searchState || !searchState.query) {
+    console.log(searchState);
+    if (!searchState || !searchState.query || !searchResults.query) {
       return null;
     }
     if (!searchResults || searchResults.hits.length <= 0) {
@@ -123,13 +123,15 @@ class Search extends Component {
       return null;
     }
     if (!open) return null;
+
+    const searchClient = algoliasearch(
+      process.env.GATSBY_ALGOLIA_APP_ID,
+      process.env.GATSBY_ALGOLIA_SEARCH_KEY
+    );
+
     return (
       <div css={searchContainer(open)} ref={this.wrapper}>
-        <InstantSearch
-          appId={process.env.GATSBY_ALGOLIA_APP_ID}
-          apiKey={process.env.GATSBY_ALGOLIA_SEARCH_KEY}
-          indexName="gatsby_site"
-        >
+        <InstantSearch searchClient={searchClient} indexName="gatsby_site">
           <div css={container}>
             <div css={searchBox}>
               <SearchBox autoFocus />
@@ -148,4 +150,4 @@ class Search extends Component {
 
 export default Search;
 
-export { Search, findResultsState };
+export { Search };
