@@ -3,8 +3,6 @@ import Typography from "typography";
 const Theme = {
   baseFontSize: 18,
   baseLineHeight: 1.75,
-  bodyColor: "#fefefe",
-  headerColor: "#FFA7C4",
   headerFontFamily: ["Roboto", "Noto Sans KR", "sans-serif"],
   bodyFontFamily: ["Roboto", "Noto Sans KR", "serif"],
   googleFonts: [
@@ -12,7 +10,7 @@ const Theme = {
     { name: "Noto Sans KR", styles: ["300", "300", "500", "500"] },
     { name: "Roboto", styles: ["300", "300", "500", "500"] }
   ],
-  headerWeight: 300,
+  headerWeight: 500,
   bodyWeight: 300,
   boldWeight: 500,
   includeNormalize: true,

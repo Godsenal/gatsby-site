@@ -9,6 +9,10 @@ const action = css`
   justify-content: center;
 
   margin-bottom: 5rem;
+
+  & a:last-child {
+    margin-left: 10px;
+  }
 `;
 
 const Template = ({ data, pageContext, location }) => {
@@ -20,8 +24,8 @@ const Template = ({ data, pageContext, location }) => {
       <Title h2="Blog" />
       <PostList edges={edges} />
       <div css={action}>
-        {previous && <CustomLink to={previous}>Previous</CustomLink>}
-        {next && <CustomLink to={next}>Next</CustomLink>}
+        {previous && <CustomLink to={previous}>이전</CustomLink>}
+        {next && <CustomLink to={next}>다음</CustomLink>}
       </div>
     </Layout>
   );

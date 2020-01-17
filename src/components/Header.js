@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { css } from "@emotion/core";
-import { graphql, StaticQuery, Link } from "gatsby";
+import { graphql, StaticQuery } from "gatsby";
 import { screen } from "../constants";
 import { CustomLink, Search } from ".";
 
@@ -26,31 +26,32 @@ const menu = css`
 const icon = css`
   border: none;
   outline: none;
-  background-color: inherit;
   cursor: pointer;
 `;
 const link = css`
   margin-right: 20px;
 `;
-const mobileFooter = css`
-  position: fixed;
-  width: 100%;
-  height: 2rem;
-  bottom: 0;
-  left: 0;
-  box-shadow: 0px -5px 20px rgba(0, 0, 0, 0.3);
+const headerOrFooter = css`
+  @media screen and (max-width: ${screen.small}px) {
+    position: fixed;
+    width: 100%;
+    height: 2rem;
+    bottom: 0;
+    left: 0;
+    box-shadow: 0px -5px 20px rgba(0, 0, 0, 0.3);
+    background-color: #fefefe;
 
-  background-color: #282c35;
-  z-index: 99;
+    z-index: 99;
 
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 
-  font-size: 16px;
+    font-size: 16px;
 
-  a {
-    margin-right: 0;
+    a {
+      margin-right: 0;
+    }
   }
 `;
 const query = graphql`
@@ -64,29 +65,7 @@ const query = graphql`
 `;
 class Header extends Component {
   state = {
-    isSmallScreen: false,
     openSearch: false
-  };
-  componentDidMount() {
-    this.setState({
-      isSmallScreen: window.innerWidth <= screen.small
-    });
-    window.addEventListener("resize", this.handleResize);
-  }
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.handleResize);
-  }
-  handleResize = () => {
-    const { isSmallScreen } = this.state;
-    if (isSmallScreen && window.innerWidth > screen.small) {
-      this.setState({
-        isSmallScreen: false
-      });
-    } else if (!isSmallScreen && window.innerWidth <= screen.small) {
-      this.setState({
-        isSmallScreen: true
-      });
-    }
   };
   handleOpenSearch = () => {
     this.setState({
@@ -103,9 +82,9 @@ class Header extends Component {
       <CustomLink to="/blog" css={link}>
         Blog
       </CustomLink>
-      <CustomLink to="/project" css={link}>
+      {/* <CustomLink to="/project" css={link}>
         Project
-      </CustomLink>
+      </CustomLink> */}
       <CustomLink to="/categories" css={link}>
         Categories
       </CustomLink>
@@ -118,7 +97,7 @@ class Header extends Component {
     </>
   );
   render() {
-    const { isSmallScreen, openSearch } = this.state;
+    const { openSearch } = this.state;
     return (
       <StaticQuery
         query={query}
@@ -134,11 +113,7 @@ class Header extends Component {
                 </CustomLink>
               </div>
               <div css={menu}>
-                {isSmallScreen ? (
-                  <div css={mobileFooter}>{this.renderLinks()}</div>
-                ) : (
-                  this.renderLinks()
-                )}
+                <div css={headerOrFooter}>{this.renderLinks()}</div>
                 <div />
               </div>
               <button css={icon} onClick={this.handleOpenSearch}>

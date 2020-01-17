@@ -2,18 +2,26 @@ import React from "react";
 import { css } from "@emotion/core";
 import { Project } from ".";
 
-const projectList = css`
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
+const container = css`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 240px);
+  gap: 15px;
 `;
 
-const ProjectList = ({ edges }) => (
-  <div css={projectList}>
-    {edges.map(edge => {
-      return <Project key={edge.node.title} {...edge.node} />;
-    })}
-  </div>
-);
+const item = css``;
+
+const ProjectList = ({ edges }) => {
+  return (
+    <div css={container}>
+      {edges.map((edge, i) => {
+        return (
+          <div css={item}>
+            <Project key={edge.node.title} {...edge.node} />
+          </div>
+        );
+      })}
+    </div>
+  );
+};
 
 export default ProjectList;

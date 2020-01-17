@@ -2,7 +2,6 @@ import React from "react";
 import { css } from "@emotion/core";
 
 const bannerBox = banner => css`
-  background-color: #fefefe;
   background-image: url(${banner});
   background-repeat: no-repeat;
   background-size: cover;

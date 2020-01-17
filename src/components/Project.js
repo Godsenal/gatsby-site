@@ -2,25 +2,9 @@ import React from "react";
 import { css } from "@emotion/core";
 
 const container = css`
-  flex-basis: 30%;
-  min-width: 300px;
-  border-radius: 10px;
   box-sizing: border-box;
-  box-shadow: 0 3px 20px rgba(0, 0, 0, 0.5);
   padding: 1rem;
-  margin: 1rem auto;
-  height: 100%;
-  &:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 3px 40px rgba(0, 0, 0, 0.5);
-    transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
-  }
-  a {
-    color: #fac351;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
+  text-align: center;
 `;
 
 const header = css`
@@ -28,15 +12,14 @@ const header = css`
 `;
 const paragrapth = css`
   min-height: 100px;
+  font-size: 0.9rem;
 `;
 const info = css`
-  font-size: 16px;
-  margin: 20px 0;
-  text-align: right;
+  font-size: 0.8rem;
 `;
 const Project = ({ title, description, date, website, git, stacks }) => (
   <div css={container} href={website}>
-    <h4 css={header}>{title}</h4>
+    <h3 css={header}>{title}</h3>
     <p css={paragrapth}>{description}</p>
     <div css={info}>
       {stacks && (
@@ -49,8 +32,8 @@ const Project = ({ title, description, date, website, git, stacks }) => (
           ))}
         </div>
       )}
-      {website && <a href={website}>» website </a>}
-      {git && <a href={git}>» github</a>}
+      {website && <a href={website}>website</a>}
+      {git && <a href={git}> | github</a>}
       <div>
         <span>{date}</span>
       </div>

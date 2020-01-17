@@ -15,19 +15,19 @@ export default ({ data, location }) => {
 
 /* Project markdown file은 frontmatter에 type: "project" 표시할 것! */
 
-export const query = graphql`
-  query {
-    allProjectsJson(sort: { order: DESC, fields: date }) {
-      edges {
-        node {
-          title
-          description
-          date
-          website
-          git
-          stacks
-        }
-      }
-    }
-  }
-`;
+// export const query = graphql`
+//   query {
+//     allProjectsJson(sort: { order: DESC, fields: date }) {
+//       edges {
+//         node {
+//           title
+//           description
+//           date
+//           website
+//           git
+//           stacks
+//         }
+//       }
+//     }
+//   }
+// `;

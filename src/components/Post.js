@@ -1,7 +1,6 @@
 import React from "react";
-import { Link } from "gatsby";
 import { css } from "@emotion/core";
-import { Banner, PostInfo } from ".";
+import { Banner, PostInfo, CustomLink } from ".";
 
 const post = css`
   display: block;
@@ -9,38 +8,29 @@ const post = css`
   border: none;
   margin-bottom: 3rem;
   min-height: 120px;
-  cursor: pointer;
-  transition: transform 0.3s ease-in-out;
-  -webkit-backface-visibility: hidden;
   text-decoration: none;
   outline: none;
-  &:hover {
-    transform: translateY(-5px);
-    transition: transform 0.3s ease-in-out;
-  }
 `;
 const excerptText = css`
-  font-size: 18px;
+  font-size: 0.9rem;
 `;
 // -webkit-backface-visibility: hidden;  to handle flickering on hover
-const info = css`
-  margin-top: 2rem;
-  color: #fefefe;
-  text-align: right;
-`;
+const info = css``;
 
 const Post = ({ frontmatter, fields, excerpt, timeToRead }) => {
   const { slug } = fields;
   const { title, date, banner, tags } = frontmatter;
   return (
-    <Link css={post} to={slug}>
+    <div css={post}>
       {banner && <Banner banner={banner} />}
-      <h3>{title}</h3>
+      <h3>
+        <CustomLink to={slug}>{title}</CustomLink>
+      </h3>
       <div css={excerptText} dangerouslySetInnerHTML={{ __html: excerpt }} />
       <div css={info}>
         <PostInfo date={date} timeToRead={timeToRead} tags={tags} />
       </div>
-    </Link>
+    </div>
   );
 };
 

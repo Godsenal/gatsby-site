@@ -6,8 +6,8 @@ import {
   HEAD,
   Title,
   Layout,
-  PostList,
-  ProjectList
+  PostList
+  // ProjectList
 } from "../components";
 import { screen } from "../constants";
 
@@ -27,12 +27,10 @@ const linkContainer = css`
   margin: 2rem 0;
   text-align: center;
 `;
-const link = css`
-  color: #fac351;
-`;
+
 export default ({ data }) => {
   const { edges: postEdges } = data.posts;
-  const { edges: projectEdges } = data.projects;
+  // const { edges: projectEdges } = data.projects;
   return (
     <Layout>
       <HEAD />
@@ -49,20 +47,16 @@ export default ({ data }) => {
       </CustomLink>
       <PostList edges={postEdges} />
       <div css={linkContainer}>
-        <CustomLink css={link} to="/blog">
-          » Read more on blog posts
-        </CustomLink>
+        <CustomLink to="/blog">» 모든 글 보기</CustomLink>
       </div>
 
-      <CustomLink to="/project">
+      {/* <CustomLink to="/project">
         <Title h2="Projects" />
       </CustomLink>
       <ProjectList edges={projectEdges} />
       <div css={linkContainer}>
-        <CustomLink css={link} to="/project">
-          » Read more on projects
-        </CustomLink>
-      </div>
+        <CustomLink to="/project">» Read more on projects</CustomLink>
+      </div> */}
     </Layout>
   );
 };
@@ -71,7 +65,7 @@ export const query = graphql`
   query {
     posts: allMarkdownRemark(
       sort: { order: DESC, fields: [frontmatter___date] }
-      limit: 3
+      limit: 5
     ) {
       edges {
         node {
@@ -87,17 +81,18 @@ export const query = graphql`
         }
       }
     }
-    projects: allProjectsJson(sort: { order: DESC, fields: date }, limit: 9) {
-      edges {
-        node {
-          title
-          description
-          date
-          website
-          git
-          stacks
-        }
-      }
-    }
   }
 `;
+// project 잠시 제외
+// projects: allProjectsJson(sort: { order: DESC, fields: date }, limit: 9) {
+//   edges {
+//     node {
+//       title
+//       description
+//       date
+//       website
+//       git
+//       stacks
+//     }
+//   }
+// }

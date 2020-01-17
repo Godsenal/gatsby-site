@@ -7,15 +7,14 @@ const container = css`
   display: flex;
   flex-wrap: wrap;
   text-align: left;
-  justify-content: flex-end;
 `;
 const tagItem = css`
-  color: #3a4570;
   box-sizing: border-box;
-  margin: 10px;
-  padding: 5px;
+  background-color: #fbf2e9;
+  padding: 0px 5px;
   border-radius: 5px;
-  background-color: #dfe2ee;
+  margin: 5px 10px 5px 0px;
+  margin-right: 10px !important;
   font-weight: 500;
 `;
 

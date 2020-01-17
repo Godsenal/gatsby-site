@@ -1,20 +1,12 @@
 import React from "react";
 import { css } from "@emotion/core";
+import { screen } from "../constants";
 
 const content = css`
   margin-top: 2rem;
   font-size: 1.05rem;
-  @media screen and (max-width: 992px) {
+  @media screen and (max-width: ${screen.small}) {
     font-size: 0.9rem;
-  }
-  a {
-    color: #fac351;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-  strong {
-    color: blanchedalmond;
   }
 `;
 
