@@ -1,21 +1,17 @@
-import React, { createContext, useState, useContext } from "react";
-import { Global, css } from "@emotion/core";
+import React, { createContext, useState, useContext } from 'react';
+import { Global, css } from '@emotion/core';
+import { ThemeProvider as EmotionThemeProvider } from 'emotion-theming';
 
 const baseTheme = {
-  background: "#fefefe",
-  bodyColor: "#2f3e54",
-  primaryColor: "#444494",
-  contrastColor: "#fefefe"
+  background: '#fefefe',
+  bodyColor: '#2f3e54',
+  primaryColor: '#444494',
+  contrastColor: '#fefefe',
 };
 
 const themes = {};
 
-const createCss = ({
-  background,
-  bodyColor,
-  primaryColor,
-  contrastColor
-}) => css`
+const createCss = ({ background, bodyColor, primaryColor, contrastColor }) => css`
   body {
     background: ${background};
     color: ${bodyColor};
@@ -30,14 +26,14 @@ const createCss = ({
     color: ${primaryColor};
   }
   button {
-    color: ${contrastColor}
-    background-color: ${primaryColor}
+    color: ${primaryColor};
+    background-color: ${contrastColor};
   }
 `;
 
 export const ThemeContext = createContext({
   theme: {},
-  setTheme: themeName => {}
+  setTheme: themeName => {},
 });
 
 export const useTheme = () => {
@@ -45,19 +41,19 @@ export const useTheme = () => {
 };
 
 const ThemeProvider = ({ children }) => {
-  const [themeName, setThemeName] = useState("");
+  const [themeName, setThemeName] = useState('');
   const currentTheme = {
     ...baseTheme,
-    ...themes[themeName]
+    ...themes[themeName],
   };
   return (
     <>
       <Global styles={createCss(currentTheme)}></Global>
-      <ThemeContext.Provider
-        value={{ theme: currentTheme, setTheme: setThemeName }}
-      >
-        {children}
-      </ThemeContext.Provider>
+      <EmotionThemeProvider theme={currentTheme}>
+        <ThemeContext.Provider value={{ theme: currentTheme, setTheme: setThemeName }}>
+          {children}
+        </ThemeContext.Provider>
+      </EmotionThemeProvider>
     </>
   );
 };

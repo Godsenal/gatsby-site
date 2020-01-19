@@ -1,32 +1,20 @@
 import React from 'react';
-import { graphql } from 'gatsby';
-import { css } from '@emotion/core';
-import { HEAD, CustomLink, Title, Layout, PostList } from '../components';
-
-const action = css`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-
-  margin-bottom: 5rem;
-
-  & a:last-child {
-    margin-left: 10px;
-  }
-`;
+import { graphql, navigate } from 'gatsby';
+import { HEAD, Title, Layout, PostList, Pagination } from '../components';
 
 const Template = ({ data, pageContext, location }) => {
   const { edges } = data.allMarkdownRemark;
-  const { previous, next } = pageContext;
+  const { currentPage, totalPage } = pageContext;
+  const handlePageChange = page => {
+    navigate(`/blog/${page}`);
+  };
+  console.log(totalPage);
   return (
     <Layout>
       <HEAD pathname={location.pathname} />
       <Title h2="Blog" />
       <PostList edges={edges} />
-      <div css={action}>
-        {previous && <CustomLink to={previous}>이전</CustomLink>}
-        {next && <CustomLink to={next}>다음</CustomLink>}
-      </div>
+      <Pagination totalPage={totalPage} currentPage={currentPage} onPageChange={handlePageChange} />
     </Layout>
   );
 };

@@ -7,6 +7,7 @@ import Disqus from './Disqus';
 import HEAD from './HEAD';
 import Header from './Header';
 import Layout from './Layout';
+import Pagination from './Pagination';
 import Post from './Post';
 import PostInfo from './PostInfo';
 import PostList from './PostList';
@@ -28,6 +29,7 @@ export {
   HEAD,
   Header,
   Layout,
+  Pagination,
   Post,
   PostInfo,
   PostList,
