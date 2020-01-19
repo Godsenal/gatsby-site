@@ -13,7 +13,6 @@ const Button = styled.button`
   border: none;
   outline: none;
   padding: 0.2rem 0.6rem;
-  margin-right: 5px;
   border-radius: 0.25rem;
 
   ${props =>

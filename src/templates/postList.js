@@ -8,7 +8,6 @@ const Template = ({ data, pageContext, location }) => {
   const handlePageChange = page => {
     navigate(`/blog/${page}`);
   };
-  console.log(totalPage);
   return (
     <Layout>
       <HEAD pathname={location.pathname} />
