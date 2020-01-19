@@ -5,7 +5,9 @@ import { screen } from "../constants";
 import { CustomLink, Search } from ".";
 
 const header = css`
-  padding: 20px 30px;
+  width: 90%;
+  margin: auto;
+  padding: 20px 0;
   font-size: 1rem;
   display: flex;
   align-items: center;
