@@ -1,7 +1,7 @@
 {
-  "name": "gatsby-starter-hello-world",
+  "name": "Godsenal_blog",
   "private": true,
-  "description": "A simplified bare-bones starter for Gatsby",
+  "description": "Godsenal의 블로그그",
   "version": "0.1.0",
   "license": "MIT",
   "scripts": {
