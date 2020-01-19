@@ -1,6 +1,6 @@
 ---
 title: Webpack 사용하기 2 - loader 사용 및 configuration
-date: "2018-03-25"
+date: '2018-03-25'
 categories:
   - dev
 tags:
@@ -46,7 +46,7 @@ npm i --save-dev css-loader style-loader
 
 그럼 간단한 `app.css`를 작성해보자.
 
-```css [app.css]
+```css:title=app.css
 body {
   background: black;
   color: white;
@@ -55,13 +55,13 @@ body {
 
 그리고 전에 작성했던 `app.js`에 이 app.css를 추가하려면 `style-loader`와 `css-loader`가 필요하다.
 
-```js [app.js]
-require("style-loader!css-loader!./app.css"); // 추가
-var hello = require("./hello.js");
-var everyone = require("./everyone.js");
+```js:title=app.js
+require('style-loader!css-loader!./app.css'); // 추가
+var hello = require('./hello.js');
+var everyone = require('./everyone.js');
 
-var el = document.createElement("div");
-el.innerText = hello + " " + everyone + "!";
+var el = document.createElement('div');
+el.innerText = hello + ' ' + everyone + '!';
 document.body.appendChild(el);
 ```
 
@@ -77,24 +77,24 @@ webpack src/app.js dist/bundle.js
 
 그런데 저렇게 계속 loader들을 적용시켜준다는 건 귀찮은 일이다. 지금까지 webpack을 사용하며 `webpack src/app.js dist/bundle.js` 이런식으로 계속 entry 파일과 output파일을 써주는 것도 귀찮다. 그래서 webpack에서는 `configuration file`을 만들어 사용할 수 있도록 해준다. webpack의 configuration file은 object를 exports하는 javascript 파일로 만든다. 간단하게 지금까지 한 것들을 `webpack.config.js`이름의 파일로 작성해보면,
 
-```js [webpack.config.js]
-const path = require("path");
+```js:title=webpack.config.js
+const path = require('path');
 
 module.exports = {
-  entry: "./src/app.js",
+  entry: './src/app.js',
   output: {
-    filename: "bundle.js",
-    path: path.resolve(__dirname, "dist")
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
   },
   module: {
     rules: [
       // webpack 2 부터는 loaders 대신 rules를 쓴다.
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"]
-      }
-    ]
-  }
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
+  },
 };
 ```
 
@@ -104,8 +104,8 @@ module.exports = {
 
 이제 config는 끝났으므로 위 `app.js`를 수정해보자.
 
-```js [app.js]
-require("./app.css"); // 추가
+```js:title=app.js
+require('./app.css'); // 추가
 // ...
 ```
 
@@ -121,7 +121,7 @@ webpack --config webpack.config.js // 그냥 webpack 이라고만 해도 된다.
 
 추가적으로 `sass-loader` 도 한 번 사용해보자. sass나 scss 파일을 load한 후 css파일로 컴파일 시켜준 후(node-sass를 필요로 한다.) 위에서 사용된 `css-loader`와 `style-loader`같은 loader들을 사용하여 style을 적용시켜 준다.
 
-```bas
+```bash
 npm i --save-dev sass-loader node-sass
 ```
 
@@ -129,7 +129,7 @@ npm i --save-dev sass-loader node-sass
 
 그리고, `webpack.config.js`에 아래와 같이 loader를 추가해주자.
 
-```js [webpack.config.js]
+```js:title=webpack.config.js
 {
     //...
         test: /(\.scss|\.sass)$/,
@@ -145,7 +145,7 @@ npm i --save-dev sass-loader node-sass
 
 sass나 scss타입의 파일이 요구될 때 `sass-loader`를 통해 그 파일을 load 한 후, css로 컴파일 해준다. 그 후 위에서 사용된 `css-loader` 와 `style-loader`가 css파일을 load할 때와 똑같이 적용된다.
 
-```scss [app.scss]
+```scss:title=app.scss
 body {
   background: black;
   div {
@@ -156,8 +156,8 @@ body {
 
 `app.css` 파일을 위와같이 `app.scss`로 바꾼 후,
 
-```js [app.js]
-require("./app.scss");
+```js:title=app.js
+require('./app.scss');
 // ...
 ```
 
@@ -177,20 +177,20 @@ npm i --save-dev babel-loader babel-core babel-preset-env
 
 이제 `webpack.config.js` 에 `babel-loader`를 추가해보자.
 
-```js [webpack.config.js]
+```js:title=webpack.config.js
 // ...
 rules: [
   {
     test: /\.js$/,
-    loader: "babel-loader", // 여러 loader를 사용할 경우 use. 그렇지 않을 경우에는 loader를 쓴다.
+    loader: 'babel-loader', // 여러 loader를 사용할 경우 use. 그렇지 않을 경우에는 loader를 쓴다.
     options: {
-      presets: ["env"]
-    }
+      presets: ['env'],
+    },
   },
   {
     test: /\.css$/,
-    use: ["style-loader", "css-loader"]
-  }
+    use: ['style-loader', 'css-loader'],
+  },
 ];
 ```
 
@@ -198,14 +198,14 @@ rules: [
 
 그럼 한 번 테스트를 해보자. ES6의 Arrow function을 사용해보자.
 
-```js app.js
-require("./app.css");
-var hello = require("./hello.js");
-var everyone = require("./everyone.js");
+```js:title=app.js
+require('./app.css');
+var hello = require('./hello.js');
+var everyone = require('./everyone.js');
 
 const createGreeting = () => {
-  var el = document.createElement("div");
-  el.innerText = hello + " " + everyone + "!";
+  var el = document.createElement('div');
+  el.innerText = hello + ' ' + everyone + '!';
 
   return el;
 };
@@ -225,7 +225,7 @@ npm i --save-dev file-loader
 
 먼저 패키지를 받은 후 설정을 해주자.
 
-```js [webpack.config.js]
+```js:title=webpack.config.js
 // ...
 rules: [
   //...
@@ -233,24 +233,24 @@ rules: [
     test: /\.(png|jpg|gif)$/,
     use: [
       {
-        loader: "file-loader",
+        loader: 'file-loader',
         options: {
-          name: "[name].[ext]"
-        }
-      }
-    ]
-  }
+          name: '[name].[ext]',
+        },
+      },
+    ],
+  },
 ];
 ```
 
 이미지 파일을 처리하는 `file-loader` 설정이다. png, jpg, gif 타입의 파일이 사용되어 웹팩이 번들링할 때 요구하는 경우, `file-loader`가 역할을 한다. `file-loader`의 options 는 [여기](https://github.com/webpack-contrib/file-loader) 를 참고하면 된다. 나는 이름을 그 파일의 이름과 확장자로 설정해주었다. 그러면 사용해보자.
 
-```js [app.js]
+```js:title=app.js
 //...
-var img = require("./image.jpg");
+var img = require('./image.jpg');
 // ...
 const createImg = () => {
-  var el = document.createElement("img");
+  var el = document.createElement('img');
   el.src = img;
   return el;
 };

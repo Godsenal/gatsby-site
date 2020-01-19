@@ -1,16 +1,15 @@
 module.exports = {
   siteMetadata: {
-    title: "Godsenal",
-    description:
-      "안녕하세요. 이태희입니다. 공부하며 배우는 것들을 작성 중입니다.",
-    url: "https://godsenal.com",
-    favicon: "/images/favicon.ico",
-    image: "/images/deadpool.jpg",
-    repository: "https://github.com/Godsenal/gatsby-site",
+    title: 'Godsenal',
+    description: '안녕하세요. 이태희입니다. 공부하며 배우는 것들을 작성 중입니다.',
+    url: 'https://godsenal.com',
+    favicon: '/images/favicon.ico',
+    image: '/images/deadpool.jpg',
+    repository: 'https://github.com/Godsenal/gatsby-site',
     profile: {
-      email: "mailto:tmqps78@gmail.com",
-      github: "https://github.com/Godsenal"
-    }
+      email: 'mailto:tmqps78@gmail.com',
+      github: 'https://github.com/Godsenal',
+    },
   },
   plugins: [
     `gatsby-plugin-emotion`,
@@ -18,8 +17,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-typography`,
       options: {
-        pathToConfigModule: `src/utils/typography.js`
-      }
+        pathToConfigModule: `src/utils/typography.js`,
+      },
     },
     {
       resolve: `gatsby-plugin-manifest`,
@@ -31,33 +30,34 @@ module.exports = {
         // see https://developers.google.com/web/fundamentals/web-app-manifest/#display
         display: `minimal-ui`,
         icon: `src/images/icon.png`, // This path is relative to the root of the site.
-        include_favicon: true // Include favicon
-      }
+        include_favicon: true, // Include favicon
+      },
     },
     `gatsby-transformer-json`,
     {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
+          `gatsby-remark-code-titles`,
           {
             resolve: `gatsby-remark-prismjs`,
             options: {
-              classPrefix: "language-",
+              classPrefix: 'language-',
               inlineCodeMarker: null,
               aliases: {},
               showLineNumbers: false,
-              noInlineHighlight: false
-            }
-          }
-        ]
-      }
+              noInlineHighlight: false,
+            },
+          },
+        ],
+      },
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `post`,
-        path: `${__dirname}/src/pages/`
-      }
+        path: `${__dirname}/src/pages/`,
+      },
     },
     // {
     //   resolve: `gatsby-source-filesystem`,
@@ -69,9 +69,9 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        trackingId: "UA-68652268-2",
-        head: true
-      }
-    }
-  ]
+        trackingId: 'UA-68652268-2',
+        head: true,
+      },
+    },
+  ],
 };

@@ -1,6 +1,6 @@
 ---
 title: Redux - selector 패턴과 reselect
-date: "2018-07-25"
+date: '2018-07-25'
 categories:
   - dev
 tags:
@@ -40,7 +40,7 @@ state = {
 
 위와 같은 State가 있을 때, 완료된 ( `isCompleted: true` )인 todo들을 가져오고자 한다. 여러가지 방법이 있다.
 
-```js reducer.js
+```js:title=reducer.js
   function todo = (state, action) => {
     switch (action.type) {
       case 'ADD_TODO':{
@@ -58,7 +58,7 @@ state = {
 `combineReducers`로 합친 여러 reducer 중 하나로 가정하자.
 위와 같이 `completedTodos` 필드를 만들어서, `todos`에 맞춰 `completedTodos`를 바꿔준다. 이렇게 하면 데이터의 중복이 생겨 redux가 불필요하게 커진다. 다른방법으로는,
 
-```jsx todolist.js
+```jsx:title=todolist.js
 const TodoList = ({ todos }) => {
   const getCompletedTodos = list => list.filter(item => item.isCompleted);
   return (
@@ -75,7 +75,7 @@ export default connect(state => ({ todos: state.todo.todos })(TodoList);
 
 데이터를 component 안에서 가공하는 방법이다. 간단하지만 component가 업데이트 될 때마다 `getCompleteTodos`의 계산이 반복된다. 이 같은 단점은 selector를 통해 처리할 수 있다.
 
-```jsx todolist.js
+```jsx:title=todolist.js
 const TodoList = ({ completedTodos }) => (
   <div>
     {
@@ -91,12 +91,11 @@ export default connect(state => ({
 
 가장 단순한 방법으로 selector를 적용한 방법이다. redux의 state를 props로 가져올 때 계산을 해서 가져오도록 하여, 불필요한 계산을 막는다. 조금 더 개선하여 재사용성을 높여보자.
 
-```js reducer.js
-export const getCompletedTodos = state =>
-  state.todo.todos.filter.map(todo => todo.isCompleted);
+```js:title=reducer.js
+export const getCompletedTodos = state => state.todo.todos.filter.map(todo => todo.isCompleted);
 ```
 
-```jsx todolist.js
+```jsx:title=todolist.js
 import { getCompletedTodo } from './reducer.js';
 
 const TodoList = ({ completedTodos }) => (
@@ -122,29 +121,27 @@ reselect는 기본적으로 위에 만들었던 selector와 같은 역할을 한
 
 먼저, memoization을 이용한다. 즉, 이전에 계산된 값을 캐시에 저장하여 불필요한 계산을 없앤다. 어떻게 적용하는지 코드를 보자.
 
-```js reducer.js
-import { createSelector } from "reselect";
+```js:title=reducer.js
+import { createSelector } from 'reselect';
 
 // 이 함수도 state에서 todos를 가져오는 selector 이다.
 const getTodos = state => state.todo.todos;
 
-export const getCompletedTodos = createSelector(
-  getTodos,
-  todos => todos.filter(todo => todo.isCompleted)
+export const getCompletedTodos = createSelector(getTodos, todos =>
+  todos.filter(todo => todo.isCompleted),
 );
 ```
 
 `createSelector`가 우리가 바라는 역할을 해준다. 첫 여러인자 또는 배열안에 인자는 `inputSelectors` 라고 할 수 있는데, 이 또한 selector로서 인자로 받는 state에서 우리가 필요한 부분을 가져오는 역할을 한다. 그 다음 인자인 함수에서는 inputSelectors에서 반환된 값을 인자로 받아 계산을 수행한다. 여기서는 간단하게 표현하기 위해 한 reducer에서 값을 가져왔지만 보통은 여러개의 reducer에서 값을 가져와 계산하는 작업을 수행한다.
 
 ```js
-import { createSelector } from "reselect";
+import { createSelector } from 'reselect';
 
 const getTodos = state => state.todo.todos;
 const getFilter = state => state.filter.filter;
 
-export const getCompletedTodos = createSelector(
-  [getTodos, getFilter],
-  (todos, filter) => todos.filter(todo => todo.isCompleted === filter)
+export const getCompletedTodos = createSelector([getTodos, getFilter], (todos, filter) =>
+  todos.filter(todo => todo.isCompleted === filter),
 );
 ```
 

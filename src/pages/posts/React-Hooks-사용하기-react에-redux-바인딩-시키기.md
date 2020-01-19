@@ -1,6 +1,6 @@
 ---
 title: React Hooks 사용하기 - react에 redux 바인딩 시키기
-date: "2018-11-23"
+date: '2018-11-23'
 tags:
   - react
   - redux
@@ -29,16 +29,16 @@ yarn add react@next react-dom@next
 
 react-redux에서 Provider는 redux에서 만들어진 store의 기본 기능들을 context를 이용해 접근 가능하도록 해준다. 우리도 context를 통해 이를 넘겨주도록 하자.
 
-```js [Context.js]
-import { createContext } from "react";
+```js:title=Context.js
+import { createContext } from 'react';
 export default createContext(null);
 ```
 
 Context는 보통 따로 사용되므로 따로 빼주는게 좋다.
 
-```jsx [Provider.js]
-import React from "react";
-import Context from "./Context";
+```jsx:title=Provider.js
+import React from 'react';
+import Context from './Context';
 
 const Provider = ({ children, store }) => (
   <Context.Provider value={store}>{children}</Context.Provider>
@@ -51,7 +51,7 @@ const Provider = ({ children, store }) => (
 
 Store는 `redux`로 만들 수 있다. 나는 한 번 비슷한 기능을 구현해보고 싶어서 따로 만들어 보았다.
 
-```js [createStore.js]
+```js:title=createStore.js
 const createStore = (initialState, reducer) => {
   let currState = initialState;
   let currReducer = reducer;
@@ -60,7 +60,7 @@ const createStore = (initialState, reducer) => {
     return currState;
   }
   function dispatch(action) {
-    if (typeof action === "function") {
+    if (typeof action === 'function') {
       return action(dispatch, getState);
     }
     currState = currReducer(currState, action);
@@ -69,15 +69,13 @@ const createStore = (initialState, reducer) => {
   function subscribe(listener) {
     currListeners.push(listener);
     return function unsubscribe() {
-      currListeners = currListeners.filter(
-        currListener => listener !== currListener
-      );
+      currListeners = currListeners.filter(currListener => listener !== currListener);
     };
   }
   return {
     dispatch,
     getState,
-    subscribe
+    subscribe,
   };
 };
 
@@ -90,10 +88,10 @@ export default createStore;
 
 이제 본격적으로 Hooks를 이용해보자. react-redux에서 store에 접근하고 싶은 컴포넌트는 `connect`를 이용해 감싸주고, 원하는 state 값이 업데이트 될 때만 rerender 되도록 하려면 `mapStateToProps`를 이용하여 state에서 원하는 값을 props로 빼주었다. 이와 같은 기능을 Hooks를 통해 구현해보려고 하였다.
 
-```js [useHookState.js]
-import React, { useContext, useEffect, useRef, useState } from "react";
-import Context from "./Context";
-import shallowEqual from "./shallowEqual"; // 객체 비교(react-redux로 부터 가져옴)
+```js:title=useHookState.js
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import Context from './Context';
+import shallowEqual from './shallowEqual'; // 객체 비교(react-redux로 부터 가져옴)
 
 const useHookState = mapState => {
   const store = useContext(Context);
@@ -101,18 +99,15 @@ const useHookState = mapState => {
   let prevMappedStateRef = useRef();
   const [mappedState, setMappedState] = useState(mapState(store.getState()));
   prevMappedStateRef.current = mappedState;
-  useEffect(
-    () => {
-      unSubscribe.current = store.subscribe(() => {
-        const newMappedState = store.getState();
-        if (!shallowEqual(prevMappedStateRef.current, newMappedState)) {
-          setMappedState(newMappedState);
-        }
-      });
-      return unsubscribe.current;
-    },
-    [store, mapState]
-  );
+  useEffect(() => {
+    unSubscribe.current = store.subscribe(() => {
+      const newMappedState = store.getState();
+      if (!shallowEqual(prevMappedStateRef.current, newMappedState)) {
+        setMappedState(newMappedState);
+      }
+    });
+    return unsubscribe.current;
+  }, [store, mapState]);
   return mappedState;
 };
 ```
@@ -127,12 +122,12 @@ shallowEqual은 `react-redux`에서 가져온 코드인데, `mapStateToProps`를
 
 Hooks API가 4개나 들어간 커스텀 Hook이 되었다! `mapDispatchToProps`는 단순히 `dispatch`만 뿌려주면 되므로 비교적 간단하게 구현할 수 있다.
 
-```js [useHookDispatch.js]
+```js:title=useHookDispatch.js
 const useHookDispatch = (mapDispatch = null) => {
   const { dispatch } = useContext(StoreContext);
   if (mapDispatch) {
     return {
-      ...mapDispatch(dispatch)
+      ...mapDispatch(dispatch),
     };
   }
   return { dispatch };
@@ -141,7 +136,7 @@ const useHookDispatch = (mapDispatch = null) => {
 
 또는, 이런식으로도 할 수 있겠다.
 
-```js [useConnect.js]
+```js:title=useConnect.js
 const useConnect = (mapState, mapDispatch) => {
   const store = useContext(StoreContext);
   const getStore = () => {
@@ -149,7 +144,7 @@ const useConnect = (mapState, mapDispatch) => {
   };
   return {
     ...useHookState(mapState, getStore),
-    ...useHookDispatch(mapDispatch, getStore)
+    ...useHookDispatch(mapDispatch, getStore),
   };
 };
 ```
@@ -172,7 +167,7 @@ const useHookDispatch = (mapDispatch = null, getStore = useStore) => {
 
 이제 사용해 볼 준비가 끝났다! 실제 컴포넌트에 사용해보자. 먼저 최상단 컴포넌트에 `Provider`를 넣어주자.
 
-```jsx [App.js]
+```jsx:title=App.js
 import React from 'react';
 import { Provider } from './Provider';
 import store from './store';
@@ -186,10 +181,10 @@ const App = () => (
 
 그리고 하위 컴포넌트 어딘가에 만든 Hooks을 연결시켜보자.
 
-```jsx [Counter.js]
-import React from "react";
-import { useHookState } from "./useHookState";
-import { useHookDispatch } from "./useHookDispatch";
+```jsx:title=Counter.js
+import React from 'react';
+import { useHookState } from './useHookState';
+import { useHookDispatch } from './useHookDispatch';
 /*
 	state = { count: 0 };
 	reducer = (state, action) => {
@@ -205,16 +200,16 @@ import { useHookDispatch } from "./useHookDispatch";
  	로 가정
 */
 const actions = {
-  increase: () => ({ type: "INCREASE" }),
-  decrease: () => ({ type: "DECREASE" })
+  increase: () => ({ type: 'INCREASE' }),
+  decrease: () => ({ type: 'DECREASE' }),
 };
 
 const mapState = state => ({
-  count: state.count
+  count: state.count,
 });
 const mapDispatch = dispatch => ({
   increase: () => dispatch(actions.increase()),
-  decrease: () => dispatch(actions.decrease())
+  decrease: () => dispatch(actions.decrease()),
 });
 const Counter = () => {
   const { count } = useHookState(mapState);
@@ -233,7 +228,7 @@ const Counter = () => {
 
 만일 props 같은 컴포넌트 내에서 사용하는 변수에 접근해야 한다면 어떻게 해야할까? 다행히 Hook Api에는 `useCallback`이 있다.
 
-```js [Counter.js]
+```js:title=Counter.js
 // ...
 const Counter = ({ defaultCount }) => {
     const mapState = useCallback(state => ({
@@ -253,51 +248,45 @@ const Counter = ({ defaultCount }) => {
 
 이렇게 useCallback을 이용하면 두 번째 인자인 `[defaultCount]`가 바뀌지 않는 한, memoize된 callback을 준다. 이제 이러한 케이스를 처리해주도록 useHookState를 조금 바꿔줘야 한다.
 
-```js [useHookState.js]
+```js:title=useHookState.js
 const useHookState = mapState => {
   const store = useContext(Context);
   const unSubscribeRef = useRef();
   const prevMappedStateRef = useRef();
   const [mappedState, setMappedState] = useState(mapState(store.getState()));
   prevMappedStateRef.current = mappedState;
-  useEffect(
-    () => {
-      unSubscribe.current = store.subscribe(() => {
-        const newMappedState = mapState(store.getState());
-        if (!shallowEqual(prevMappedStateRef.current, newMappedState)) {
-          setMappedState(newMappedState);
-        }
-      });
-      return unsubscribe.current;
-    },
-    [store, mapState]
-  );
+  useEffect(() => {
+    unSubscribe.current = store.subscribe(() => {
+      const newMappedState = mapState(store.getState());
+      if (!shallowEqual(prevMappedStateRef.current, newMappedState)) {
+        setMappedState(newMappedState);
+      }
+    });
+    return unsubscribe.current;
+  }, [store, mapState]);
   return mappedState;
 };
 ```
 
 mapState가 바뀔 경우, useEffect가 다시 실행되고 store를 한번 더 subscribe 하게 된다. 이를 해결해 줄 필요가 있다. useEffect가 컴포넌트 마운트시 실행될 때 말고 다음에 실행될 때, 즉, `store`나 `mapState`가 바뀌었을 때는 `unSubscribe.current`가 있다는 점을 생각하여 다음과 같이 코드를 짰다.
 
-```js [useHookState]
+```js:title=useHookState
 const useHookState = mapState => {
   //...
-  useEffect(
-    () => {
-      const checkAndUpdate = () => {
-        const newMappedState = mapState(currStore.current.getState());
-        if (!shallowEqual(currMappedState.current, newMappedState)) {
-          setMappedState(newMappedState);
-        }
-      };
-      if (unSubscribe.current) {
-        unSubscribe.current();
-        checkAndUpdate();
+  useEffect(() => {
+    const checkAndUpdate = () => {
+      const newMappedState = mapState(currStore.current.getState());
+      if (!shallowEqual(currMappedState.current, newMappedState)) {
+        setMappedState(newMappedState);
       }
-      unSubscribe.current = store.subscribe(checkAndUpdate);
-      return unsubscribe.current;
-    },
-    [store, mapState]
-  );
+    };
+    if (unSubscribe.current) {
+      unSubscribe.current();
+      checkAndUpdate();
+    }
+    unSubscribe.current = store.subscribe(checkAndUpdate);
+    return unsubscribe.current;
+  }, [store, mapState]);
 };
 ```
 

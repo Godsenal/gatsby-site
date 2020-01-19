@@ -1,6 +1,6 @@
 ---
 title: Webpack 사용하기 1 - 시작
-date: "2018-03-25"
+date: '2018-03-25'
 categories:
   - dev
 tags:
@@ -42,26 +42,26 @@ webpacktest
 
 먼저,
 
-```js hello.js
-module.exports = "Hello";
+```js:title=hello.js
+module.exports = 'Hello';
 ```
 
 'Hello'를 모듈로서 반환해주는 파일 `hello.js` 를 만들고,
 
-```js everyone.js
-module.exports = "Everyone";
+```js:title=everyone.js
+module.exports = 'Everyone';
 ```
 
 'Everyone'을 반환해주는 `everyone.js`를 만든다.
 
 이제 이 두 개의 모듈을 가져와서 `div` element 안에 넣어주는 파일을 만들어 보자.
 
-```js app.js
-var hello = require("./hello.js");
-var everyone = require("./everyone.js");
+```js:title=app.js
+var hello = require('./hello.js');
+var everyone = require('./everyone.js');
 
-var el = document.createElement("div");
-el.innerText = hello + " " + everyone + "!";
+var el = document.createElement('div');
+el.innerText = hello + ' ' + everyone + '!';
 document.body.appendChild(el);
 ```
 
@@ -79,7 +79,7 @@ webpack src/app.js dist/bundle.js
 
 이 명령어를 이용하여 `app.js` 파일을 브라우저에서 실행가능한 `bundle.js`로 컴파일 할 수 있다. 이제 브라우저에서 실행가능한 파일이 생성되었으므로 이를 로드하는 html파일을 `dist`폴더에 만들어보자.
 
-```html index.html
+```html:title=index.html
 <!DOCTYPE html>
 <html>
   <head>

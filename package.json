@@ -53,6 +53,7 @@
     "url": "https://github.com/gatsbyjs/gatsby/issues"
   },
   "devDependencies": {
-    "eslint-config-react-app": "^5.1.0"
+    "eslint-config-react-app": "^5.1.0",
+    "gatsby-remark-code-titles": "^1.1.0"
   }
 }
