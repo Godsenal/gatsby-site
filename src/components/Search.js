@@ -1,16 +1,16 @@
-import React, { createRef, Component } from "react";
+import React, { createRef, Component } from 'react';
 import {
   InstantSearch,
   connectStateResults,
   SearchBox,
   Hits,
-  Highlight
-} from "react-instantsearch-dom";
-import { css } from "@emotion/core";
-import algoliasearch from "algoliasearch/lite";
-import { ThemeContext } from "../theme";
-import { CustomLink } from "../components";
-import { screen } from "../constants";
+  Highlight,
+} from 'react-instantsearch-dom';
+import { css } from '@emotion/core';
+import algoliasearch from 'algoliasearch/lite';
+import { ThemeContext } from '../theme';
+import { CustomLink } from '../components';
+import { screen } from '../constants';
 
 const searchContainer = (theme, open) => css`
   position: fixed;
@@ -31,7 +31,7 @@ const searchContainer = (theme, open) => css`
     width: 100%;
     margin-top: 0;
     margin-left: 0;
-    top: ${open ? "0px" : "-1000px"};
+    top: ${open ? '0px' : '-1000px'};
     left: 0;
   }
 `;
@@ -80,49 +80,40 @@ const Post = ({ hit }) => (
     </CustomLink>
   </div>
 );
-const SearchResults = connectStateResults(
-  ({ searchState, searchResults, children }) => {
-    console.log(searchState);
-    if (!searchState || !searchState.query || !searchResults.query) {
-      return null;
-    }
-    if (!searchResults || searchResults.hits.length <= 0) {
-      return <div css={noResult}>No results for {searchState.query}</div>;
-    }
-    return children;
+const SearchResults = connectStateResults(({ searchState, searchResults, children }) => {
+  console.log(searchState);
+  if (!searchState || !searchState.query || !searchResults.query) {
+    return null;
   }
-);
+  if (!searchResults || searchResults.hits.length <= 0) {
+    return <div css={noResult}>No results for {searchState.query}</div>;
+  }
+  return children;
+});
 class Search extends Component {
   static contextType = ThemeContext;
   wrapper = createRef();
   componentDidMount() {
-    window.addEventListener("mousedown", this.handleMousedown);
+    window.addEventListener('mousedown', this.handleMousedown);
   }
   componentWillUnmount() {
-    window.removeEventListener("mousedown", this.handleMousedown);
+    window.removeEventListener('mousedown', this.handleMousedown);
   }
   handleMousedown = e => {
-    if (
-      this.props.open &&
-      this.wrapper.current &&
-      !this.wrapper.current.contains(e.target)
-    ) {
+    if (this.props.open && this.wrapper.current && !this.wrapper.current.contains(e.target)) {
       this.props.handleClose();
     }
   };
   render() {
     const { open } = this.props;
-    if (
-      !process.env.GATSBY_ALGOLIA_APP_ID ||
-      !process.env.GATSBY_ALGOLIA_SEARCH_KEY
-    ) {
+    if (!process.env.GATSBY_ALGOLIA_APP_ID || !process.env.GATSBY_ALGOLIA_SEARCH_KEY) {
       return null;
     }
     if (!open) return null;
 
     const searchClient = algoliasearch(
       process.env.GATSBY_ALGOLIA_APP_ID,
-      process.env.GATSBY_ALGOLIA_SEARCH_KEY
+      process.env.GATSBY_ALGOLIA_SEARCH_KEY,
     );
 
     return (

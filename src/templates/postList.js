@@ -1,7 +1,7 @@
-import React from "react";
-import { graphql } from "gatsby";
-import { css } from "@emotion/core";
-import { HEAD, CustomLink, Title, Layout, PostList } from "../components";
+import React from 'react';
+import { graphql } from 'gatsby';
+import { css } from '@emotion/core';
+import { HEAD, CustomLink, Title, Layout, PostList } from '../components';
 
 const action = css`
   width: 100%;

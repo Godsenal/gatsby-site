@@ -1,5 +1,5 @@
-import React from "react";
-import { css } from "@emotion/core";
+import React from 'react';
+import { css } from '@emotion/core';
 
 const container = css`
   box-sizing: border-box;
@@ -27,7 +27,7 @@ const Project = ({ title, description, date, website, git, stacks }) => (
           {stacks.map((stack, i) => (
             <span key={stack}>
               {stack}
-              {i !== stacks.length - 1 && ", "}
+              {i !== stacks.length - 1 && ', '}
             </span>
           ))}
         </div>

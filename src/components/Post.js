@@ -1,6 +1,6 @@
-import React from "react";
-import { css } from "@emotion/core";
-import { Banner, PostInfo, CustomLink } from ".";
+import React from 'react';
+import { css } from '@emotion/core';
+import { Banner, PostInfo, CustomLink } from '.';
 
 const post = css`
   display: block;

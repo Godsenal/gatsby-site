@@ -1,5 +1,5 @@
-import React from "react";
-import { Title, Layout, CustomLink } from "../components";
+import React from 'react';
+import { Title, Layout, CustomLink } from '../components';
 
 export default () => {
   return (

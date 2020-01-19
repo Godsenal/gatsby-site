@@ -1,6 +1,6 @@
-import React from "react";
-import { css } from "@emotion/core";
-import { screen } from "../constants";
+import React from 'react';
+import { css } from '@emotion/core';
+import { screen } from '../constants';
 
 const content = css`
   margin-top: 2rem;

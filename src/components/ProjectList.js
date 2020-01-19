@@ -1,6 +1,6 @@
-import React from "react";
-import { css } from "@emotion/core";
-import { Project } from ".";
+import React from 'react';
+import { css } from '@emotion/core';
+import { Project } from '.';
 
 const container = css`
   display: grid;

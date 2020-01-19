@@ -1,6 +1,6 @@
-import React from "react";
-import { graphql } from "gatsby";
-import { Title, Layout, PostList } from "../components";
+import React from 'react';
+import { graphql } from 'gatsby';
+import { Title, Layout, PostList } from '../components';
 
 const Template = ({ data, pageContext }) => {
   const { edges } = data.allMarkdownRemark;

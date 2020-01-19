@@ -1,16 +1,7 @@
-import React from "react";
-import { graphql, Link } from "gatsby";
-import { css } from "@emotion/core";
-import {
-  Banner,
-  Content,
-  Disqus,
-  HEAD,
-  Layout,
-  PostInfo,
-  Profile,
-  Title
-} from "../components";
+import React from 'react';
+import { graphql, Link } from 'gatsby';
+import { css } from '@emotion/core';
+import { Banner, Content, Disqus, HEAD, Layout, PostInfo, Profile, Title } from '../components';
 
 const prevOrNext = css`
   display: flex;

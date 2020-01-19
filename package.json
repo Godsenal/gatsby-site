@@ -10,7 +10,9 @@
     "build": "gatsby build",
     "serve": "gatsby serve",
     "post": "node cli/post.js",
-    "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\""
+    "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\"",
+    "lint": "eslint src/**/*.js",
+    "format": "prettier src/**/*.js --write"
   },
   "dependencies": {
     "@emotion/core": "^10.0.5",
@@ -49,5 +51,8 @@
   },
   "bugs": {
     "url": "https://github.com/gatsbyjs/gatsby/issues"
+  },
+  "devDependencies": {
+    "eslint-config-react-app": "^5.1.0"
   }
 }

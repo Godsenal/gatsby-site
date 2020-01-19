@@ -1,6 +1,6 @@
-import React from "react";
-import { css } from "@emotion/core";
-import { CustomLink } from ".";
+import React from 'react';
+import { css } from '@emotion/core';
+import { CustomLink } from '.';
 
 const container = css`
   width: 100%;

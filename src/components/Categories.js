@@ -1,6 +1,6 @@
-import React from "react";
-import { css } from "@emotion/core";
-import { CustomLink } from ".";
+import React from 'react';
+import { css } from '@emotion/core';
+import { CustomLink } from '.';
 
 const categoryItem = css`
   text-align: center;
@@ -17,11 +17,7 @@ const Categories = ({ categories, categoriesCount, ...props }) => (
       categories.map(category => (
         <div css={categoryItem}>
           <h1>
-            <CustomLink
-              key={category}
-              to={`/categories/${category}`}
-              {...props}
-            >
+            <CustomLink key={category} to={`/categories/${category}`} {...props}>
               {category}
             </CustomLink>
           </h1>

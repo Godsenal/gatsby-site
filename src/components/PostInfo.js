@@ -1,6 +1,6 @@
-import React from "react";
-import { css } from "@emotion/core";
-import { Tags } from ".";
+import React from 'react';
+import { css } from '@emotion/core';
+import { Tags } from '.';
 const info = css`
   font-size: 0.8rem;
 `;

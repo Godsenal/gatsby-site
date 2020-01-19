@@ -1,6 +1,5 @@
-import React from "react";
-import { graphql } from "gatsby";
-import { HEAD, Title, Layout, ProjectList } from "../components";
+import React from 'react';
+import { HEAD, Title, Layout, ProjectList } from '../components';
 
 export default ({ data, location }) => {
   const { edges } = data.allProjectsJson;

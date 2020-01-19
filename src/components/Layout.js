@@ -1,7 +1,7 @@
-import React from "react";
-import { css } from "@emotion/core";
-import { screen } from "../constants";
-import { Header } from ".";
+import React from 'react';
+import { css } from '@emotion/core';
+import { screen } from '../constants';
+import { Header } from '.';
 
 const main = css`
   width: 100%;

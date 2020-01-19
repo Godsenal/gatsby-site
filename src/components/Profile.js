@@ -1,7 +1,7 @@
-import React from "react";
-import { css } from "@emotion/core";
-import { StaticQuery, graphql } from "gatsby";
-import { useTheme } from "../theme";
+import React from 'react';
+import { css } from '@emotion/core';
+import { StaticQuery, graphql } from 'gatsby';
+import { useTheme } from '../theme';
 
 const query = graphql`
   {

@@ -1,5 +1,5 @@
-import React from "react";
-import { css } from "@emotion/core";
+import React from 'react';
+import { css } from '@emotion/core';
 
 const bannerBox = banner => css`
   background-image: url(${banner});

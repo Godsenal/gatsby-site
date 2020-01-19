@@ -1,14 +1,15 @@
-import React from "react";
-import { css } from "@emotion/core";
+import React from 'react';
+import { graphql } from 'gatsby';
+import { css } from '@emotion/core';
 import {
   Avatar,
   CustomLink,
   HEAD,
   Title,
   Layout,
-  PostList
+  PostList,
   // ProjectList
-} from "../components";
+} from '../components';
 
 const info = css`
   margin-bottom: 100px;
@@ -72,10 +73,7 @@ export default ({ data }) => {
 
 export const query = graphql`
   query {
-    posts: allMarkdownRemark(
-      sort: { order: DESC, fields: [frontmatter___date] }
-      limit: 5
-    ) {
+    posts: allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }, limit: 5) {
       edges {
         node {
           excerpt(truncate: true)

@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { css } from "@emotion/core";
-import { graphql, StaticQuery } from "gatsby";
-import { screen } from "../constants";
-import { CustomLink, Search } from ".";
+import React, { Component } from 'react';
+import { css } from '@emotion/core';
+import { graphql, StaticQuery } from 'gatsby';
+import { screen } from '../constants';
+import { CustomLink, Search } from '.';
 
 const header = css`
   width: 90%;
@@ -67,16 +67,16 @@ const query = graphql`
 `;
 class Header extends Component {
   state = {
-    openSearch: false
+    openSearch: false,
   };
   handleOpenSearch = () => {
     this.setState({
-      openSearch: true
+      openSearch: true,
     });
   };
   handleCloseSearch = () => {
     this.setState({
-      openSearch: false
+      openSearch: false,
     });
   };
   renderLinks = () => (
@@ -119,7 +119,9 @@ class Header extends Component {
                 <div />
               </div>
               <button css={icon} onClick={this.handleOpenSearch}>
-                <span role="img">🔍</span>
+                <span role="img" aria-label="search">
+                  🔍
+                </span>
               </button>
               <Search open={openSearch} handleClose={this.handleCloseSearch} />
             </div>
