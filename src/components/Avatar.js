@@ -8,7 +8,7 @@ const imgStyle = css`
   border-radius: 50%;
 `;
 const Avatar = ({ src = profileImg, ...props }) => {
-  return <img className={props.className} css={css(imgStyle)} src={src} />;
+  return <img className={props.className} css={imgStyle} src={src} />;
 };
 
 export default Avatar;

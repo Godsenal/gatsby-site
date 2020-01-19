@@ -9,18 +9,21 @@ import {
   PostList
   // ProjectList
 } from "../components";
-import { screen } from "../constants";
 
-const mainTitle = css`
+const info = css`
   margin-bottom: 100px;
 `;
-const avatarImg = css`
-  float: right;
-  @media screen and (max-width: ${screen.small}px) {
-    width: 64px;
-    height: 64px;
-    float: initial;
-  }
+const profile = css`
+  flex: 1;
+`;
+const mainTitle = css`
+  display: flex;
+  align-items: center;
+`;
+const avatar = css`
+  width: 3.5rem;
+  height: 3.5rem;
+  margin-right: 10px;
 `;
 const linkContainer = css`
   width: 100%;
@@ -34,13 +37,19 @@ export default ({ data }) => {
   return (
     <Layout>
       <HEAD />
-      <Avatar css={avatarImg} />
-      <div css={mainTitle}>
-        <h1>Godsenal's site</h1>
-        <p>
-          안녕하세요. 이태희입니다. <br />
-          공부하며 배우는 것들을 작성 중입니다.
-        </p>
+      <div css={info}>
+        <div css={profile}>
+          <div css={mainTitle}>
+            <Avatar css={avatar} />
+            <h1>Godsenal's site</h1>
+          </div>
+          <div>
+            <p>
+              안녕하세요. 이태희입니다. <br />
+              공부하며 배우는 것들을 작성 중입니다.
+            </p>
+          </div>
+        </div>
       </div>
       <CustomLink to="/blog">
         <Title h2="Blogs" />
