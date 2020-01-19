@@ -6,7 +6,7 @@ module.exports = {
     url: "https://godsenal.com",
     favicon: "/images/favicon.ico",
     image: "/images/deadpool.jpg",
-    repository: "",
+    repository: "https://github.com/Godsenal/gatsby-site",
     profile: {
       email: "mailto:tmqps78@gmail.com",
       github: "https://github.com/Godsenal"
