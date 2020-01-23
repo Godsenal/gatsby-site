@@ -81,7 +81,6 @@ const Post = ({ hit }) => (
   </div>
 );
 const SearchResults = connectStateResults(({ searchState, searchResults, children }) => {
-  console.log(searchState);
   if (!searchState || !searchState.query || !searchResults.query) {
     return null;
   }
