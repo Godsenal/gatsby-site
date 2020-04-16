@@ -26,10 +26,11 @@ const nextPost = css`
 const listContainer = css`
   text-align: right;
 `;
+
 const Template = ({ data, pageContext, location }) => {
   const { markdownRemark } = data;
-  const { title, date, banner, tags } = markdownRemark.frontmatter;
-  const { id, html, timeToRead, excerpt } = markdownRemark;
+  const { id, html, timeToRead, excerpt, tableOfContents, frontmatter } = markdownRemark;
+  const { title, date, banner, tags } = frontmatter;
   const { previous, next } = pageContext;
 
   return (
@@ -39,6 +40,9 @@ const Template = ({ data, pageContext, location }) => {
       <PostInfo date={date} timeToRead={timeToRead} tags={tags} />
       {banner && <Banner banner={banner} />}
       <Content dangerouslySetInnerHTML={{ __html: html }} />
+      {/* <div css={toc}>
+        <div dangerouslySetInnerHTML={{ __html: tableOfContents }} />
+      </div> */}
       <h4 css={listContainer}>
         <Link to="/blog">» List</Link>
       </h4>
@@ -76,6 +80,7 @@ export const query = graphql`
         tags
         categories
       }
+      tableOfContents
     }
   }
 `;
