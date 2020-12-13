@@ -18,6 +18,7 @@ import Search from './Search';
 import SimplePost from './SimplePost';
 import Tags from './Tags';
 import Title from './Title';
+import Toc from './Toc';
 
 export {
   Avatar,
@@ -40,4 +41,5 @@ export {
   SimplePost,
   Tags,
   Title,
+  Toc
 };

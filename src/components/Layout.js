@@ -10,6 +10,7 @@ const header = css`
   width: 100%;
 `;
 const body = css`
+  position: relative;
   width: 40%;
   min-width: ${screen.small}px;
   margin: auto;

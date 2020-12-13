@@ -1,6 +1,6 @@
 ---
 title: Github Page로 Blog 만들기
-date: "2018-02-02"
+date: '2018-02-02'
 categories:
   - blog
 tags:
@@ -20,9 +20,9 @@ banner: /images/post_01/githubpage.jpg
 
 <!--more-->
 
-## 만들어봅시다
+# 만들어봅시다
 
-### Github?
+## Github?
 
 개발 공부를 하는 사람이라면 모두 github를 알겠지만 그렇지 않다면 모를 수 도 있다.
 
@@ -73,7 +73,7 @@ clone한 프로젝트에 들어간 후, 메인 페이지가 될 html파일을 �
 
 # Jekyll 이용하기
 
-### Jekyll?
+## Jekyll?
 
 Jekyll은 HTML, Markdown 같은 마크업 언어로 글을 작성하면 정해 놓은 규칙에 따라 다양한 레이아웃으로 정적 웹사이트를 만들어 주는 **정적 사이트 생성 엔진** 이다. 자세한 설명은 [이 글](http://t-robotics.blogspot.kr/2016/04/jekyll.html)을 보면 될 것 같다.
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql, Link } from 'gatsby';
 import { css } from '@emotion/core';
-import { Banner, Content, Disqus, HEAD, Layout, PostInfo, Profile, Title } from '../components';
+import { Banner, Content, Disqus, HEAD, Layout, PostInfo, Profile, Title, Toc } from '../components';
 
 const prevOrNext = css`
   display: flex;
@@ -30,6 +30,7 @@ const listContainer = css`
 const Template = ({ data, pageContext, location }) => {
   const { markdownRemark } = data;
   const { id, html, timeToRead, excerpt, tableOfContents, frontmatter } = markdownRemark;
+  console.log(tableOfContents);
   const { title, date, banner, tags } = frontmatter;
   const { previous, next } = pageContext;
 
@@ -37,12 +38,10 @@ const Template = ({ data, pageContext, location }) => {
     <Layout>
       <HEAD title={title} pathname={location.pathname} description={excerpt} />
       <Title h1={title} />
+      <Toc tableOfContents={tableOfContents} />
       <PostInfo date={date} timeToRead={timeToRead} tags={tags} />
       {banner && <Banner banner={banner} />}
       <Content dangerouslySetInnerHTML={{ __html: html }} />
-      {/* <div css={toc}>
-        <div dangerouslySetInnerHTML={{ __html: tableOfContents }} />
-      </div> */}
       <h4 css={listContainer}>
         <Link to="/blog">» List</Link>
       </h4>
