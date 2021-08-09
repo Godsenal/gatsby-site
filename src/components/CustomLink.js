@@ -6,8 +6,10 @@ const link = css`
   text-decoration: none;
 `;
 
-export default ({ children, ...props }) => (
+const CustomLink = ({ children, ...props }) => (
   <Link css={link} {...props}>
     {children}
   </Link>
 );
+
+export default CustomLink;

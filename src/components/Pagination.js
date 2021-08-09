@@ -15,7 +15,7 @@ const Button = styled.button`
   padding: 0.2rem 0.6rem;
   border-radius: 0.25rem;
 
-  ${props =>
+  ${(props) =>
     props.isActive &&
     `
     color: ${props.theme.contrastColor};
@@ -25,7 +25,7 @@ const Button = styled.button`
 `;
 
 const Pagination = ({ currentPage, totalPage, onPageChange }) => {
-  const handleClick = page => e => {
+  const handleClick = (page) => (e) => {
     e.preventDefault();
     if (page < 1 || page > totalPage) {
       return;
@@ -48,7 +48,7 @@ const Pagination = ({ currentPage, totalPage, onPageChange }) => {
     <Container>
       <Button onClick={handleClick(1)}>{`|<`}</Button>
       <Button onClick={handleClick(currentPage - 1)}>{`<`}</Button>
-      {pages.map(page => (
+      {pages.map((page) => (
         <Button key={page} onClick={handleClick(page)} isActive={page === currentPage}>
           {page}
         </Button>

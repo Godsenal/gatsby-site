@@ -5,7 +5,7 @@ import { HEAD, Title, Layout, PostList, Pagination } from '../components';
 const Template = ({ data, pageContext, location }) => {
   const { edges } = data.allMarkdownRemark;
   const { currentPage, totalPage } = pageContext;
-  const handlePageChange = page => {
+  const handlePageChange = (page) => {
     navigate(`/blog/${page}`);
   };
   return (

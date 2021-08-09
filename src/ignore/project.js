@@ -1,7 +1,7 @@
 import React from 'react';
 import { HEAD, Title, Layout, ProjectList } from '../components';
 
-export default ({ data, location }) => {
+const Project = ({ data, location }) => {
   const { edges } = data.allProjectsJson;
   return (
     <Layout>
@@ -11,6 +11,8 @@ export default ({ data, location }) => {
     </Layout>
   );
 };
+
+export default Project;
 
 /* Project markdown file은 frontmatter에 type: "project" 표시할 것! */
 
