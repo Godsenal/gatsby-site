@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { graphql, Link } from 'gatsby';
 import { DiscussionEmbed } from 'disqus-react';
 import { css } from '@emotion/react';
 import { Banner, Content, HEAD, Layout, PostInfo, Profile, Title, Toc } from '../components';
 
+const ANCHOR_SELECTOR = '.anchor';
 const DISQUS_NAME = 'godsenal-1';
 
 const prevOrNext = css`
@@ -31,19 +32,51 @@ const listContainer = css`
 `;
 
 const Template = ({ data, pageContext, location }) => {
+  const $content = useRef(null);
+  const [activeHash, setActiveHash] = useState('');
   const { markdownRemark } = data;
   const { id, html, timeToRead, excerpt, tableOfContents, frontmatter } = markdownRemark;
   const { title, date, banner, tags } = frontmatter;
   const { previous, next } = pageContext;
 
+  useEffect(() => {
+    const anchors = $content.current.querySelectorAll(ANCHOR_SELECTOR);
+    const GAP = 100;
+
+    if (anchors.length === 0) {
+      return;
+    }
+
+    const handleScroll = () => {
+      if (GAP <= anchors[0].getBoundingClientRect().top) {
+        setActiveHash('');
+        return;
+      }
+
+      const firstMatchIndex = [...anchors].findIndex((_, i) => {
+        return !anchors[i + 1] || anchors[i + 1].getBoundingClientRect().top >= GAP;
+      });
+
+      firstMatchIndex > -1 && setActiveHash(anchors[firstMatchIndex].hash);
+    };
+
+    handleScroll();
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <Layout>
       <HEAD title={title} pathname={location.pathname} description={excerpt} />
       <Title h1={title} />
-      <Toc tableOfContents={tableOfContents} />
+      <Toc tableOfContents={tableOfContents} activeHash={activeHash} />
       <PostInfo date={date} timeToRead={timeToRead} tags={tags} />
       {banner && <Banner banner={banner} />}
-      <Content dangerouslySetInnerHTML={{ __html: html }} />
+      <Content ref={$content} dangerouslySetInnerHTML={{ __html: html }} />
       <h4 css={listContainer}>
         <Link to="/blog">» List</Link>
       </h4>

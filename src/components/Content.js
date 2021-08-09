@@ -10,10 +10,10 @@ const content = css`
   }
 `;
 
-const Content = ({ children, ...props }) => (
-  <div css={content} {...props}>
+const Content = React.forwardRef(({ children, ...props }, ref) => (
+  <div ref={ref} css={content} {...props}>
     {children}
   </div>
-);
+));
 
 export default Content;

@@ -11,7 +11,7 @@ const wrapper = css`
   top: 110px;
   left: 110%;
 `;
-const toc = (scrolled) => css`
+const toc = (scrolled, activeHash) => css`
   ${scrolled &&
   `
     position: fixed;
@@ -25,12 +25,22 @@ const toc = (scrolled) => css`
   ul,
   li {
     list-style-type: none;
+
+    a {
+      display: inline-block;
+      transition: transform 0.125s ease-in;
+    }
+
+    a[href='${activeHash}'] {
+      font-weight: bold;
+      transform: scale(1.05);
+    }
   }
 `;
 
 const SCROLL_Y = 150;
 
-const Toc = ({ tableOfContents }) => {
+const Toc = ({ tableOfContents, activeHash }) => {
   const [scrolled, setScrolled] = useState(false);
 
   const handleScroll = () => {
@@ -44,7 +54,7 @@ const Toc = ({ tableOfContents }) => {
 
   return (
     <div css={wrapper}>
-      <div css={toc(scrolled)} dangerouslySetInnerHTML={{ __html: tableOfContents }} />
+      <div css={toc(scrolled, activeHash)} dangerouslySetInnerHTML={{ __html: tableOfContents }} />
     </div>
   );
 };
