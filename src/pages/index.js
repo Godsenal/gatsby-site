@@ -32,7 +32,7 @@ const linkContainer = css`
   text-align: center;
 `;
 
-export default ({ data }) => {
+const Home = ({ data }) => {
   const { edges: postEdges } = data.posts;
   // const { edges: projectEdges } = data.projects;
   return (
@@ -103,3 +103,5 @@ export const query = graphql`
 //     }
 //   }
 // }
+
+export default Home;

@@ -2,7 +2,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { HEAD, Title, Layout, Profile, Content } from '../components';
 
-export default ({ data, location }) => {
+const About = ({ data, location }) => {
   const { repository } = data.site.siteMetadata;
   return (
     <Layout>
@@ -34,3 +34,5 @@ export const query = graphql`
     }
   }
 `;
+
+export default About;

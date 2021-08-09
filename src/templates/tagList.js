@@ -2,12 +2,13 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { Layout, Title, Tags } from '../components';
 
-export default ({ data, pageContext }) => {
+const TagList = ({ data, pageContext }) => {
   const { tags } = pageContext;
   const tagsCount = {};
-  data.allMarkdownRemark.edges.forEach(post => {
+  data.allMarkdownRemark.edges.forEach((post) => {
     const currTags = post.node.frontmatter.tags;
-    currTags && currTags.forEach(tag => (tagsCount[tag] ? ++tagsCount[tag] : (tagsCount[tag] = 1)));
+    currTags &&
+      currTags.forEach((tag) => (tagsCount[tag] ? ++tagsCount[tag] : (tagsCount[tag] = 1)));
   });
   return (
     <Layout>
@@ -18,7 +19,7 @@ export default ({ data, pageContext }) => {
 };
 
 export const query = graphql`
-  query($tags: [String]) {
+  query ($tags: [String]) {
     allMarkdownRemark(limit: 1000, filter: { frontmatter: { tags: { in: $tags } } }) {
       totalCount
       edges {
@@ -32,3 +33,5 @@ export const query = graphql`
     }
   }
 `;
+
+export default TagList;

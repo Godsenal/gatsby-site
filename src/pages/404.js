@@ -1,7 +1,7 @@
 import React from 'react';
 import { Title, Layout, CustomLink } from '../components';
 
-export default () => {
+const NotFound = () => {
   return (
     <Layout>
       <Title h1="Not Found" body="There's not a page yet at this route.">
@@ -10,3 +10,5 @@ export default () => {
     </Layout>
   );
 };
+
+export default NotFound;
