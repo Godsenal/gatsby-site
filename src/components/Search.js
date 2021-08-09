@@ -6,7 +6,7 @@ import {
   Hits,
   Highlight,
 } from 'react-instantsearch-dom';
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import algoliasearch from 'algoliasearch/lite';
 import { ThemeContext } from '../theme';
 import { CustomLink } from '../components';
@@ -98,7 +98,7 @@ class Search extends Component {
   componentWillUnmount() {
     window.removeEventListener('mousedown', this.handleMousedown);
   }
-  handleMousedown = e => {
+  handleMousedown = (e) => {
     if (this.props.open && this.wrapper.current && !this.wrapper.current.contains(e.target)) {
       this.props.handleClose();
     }

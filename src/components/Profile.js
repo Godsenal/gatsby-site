@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import { StaticQuery, graphql } from 'gatsby';
 import { useTheme } from '../theme';
 
@@ -15,7 +15,7 @@ const query = graphql`
     }
   }
 `;
-const container = primaryColor => css`
+const container = (primaryColor) => css`
   margin: 3rem 0;
   padding: 10px;
   padding-right: 30px;
@@ -40,7 +40,7 @@ const Profile = () => {
   return (
     <StaticQuery
       query={query}
-      render={data => {
+      render={(data) => {
         const { email, github } = data.site.siteMetadata.profile;
         return (
           <div css={container(theme.primaryColor)}>

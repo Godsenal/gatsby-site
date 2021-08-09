@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import { graphql, StaticQuery } from 'gatsby';
 import { screen, HEADER_HEIGHT } from '../constants';
 import useEventListener from '../hooks/useEventListener';

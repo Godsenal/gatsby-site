@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import { CustomLink } from '.';
 
 const container = css`
@@ -21,7 +21,7 @@ const tagItem = css`
 const Tags = ({ tags, tagsCount, ...props }) => (
   <div css={container}>
     {tags &&
-      tags.map(tag => (
+      tags.map((tag) => (
         <CustomLink key={tag} css={tagItem} to={`/tags/${tag}`} {...props}>
           # {tag} {tagsCount && tagsCount[tag]}
         </CustomLink>

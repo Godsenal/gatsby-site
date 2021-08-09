@@ -1,6 +1,5 @@
 import React, { createContext, useState, useContext } from 'react';
-import { Global, css } from '@emotion/core';
-import { ThemeProvider as EmotionThemeProvider } from 'emotion-theming';
+import { Global, css, ThemeProvider as EmotionThemeProvider } from '@emotion/react';
 
 const baseTheme = {
   background: '#fefefe',
@@ -33,7 +32,7 @@ const createCss = ({ background, bodyColor, primaryColor, contrastColor }) => cs
 
 export const ThemeContext = createContext({
   theme: {},
-  setTheme: themeName => {},
+  setTheme: (themeName) => {},
 });
 
 export const useTheme = () => {

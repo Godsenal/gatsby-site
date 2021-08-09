@@ -1,12 +1,12 @@
 import React from 'react';
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import { useTheme } from '../theme';
 
 const header = css`
   position: relative;
   word-break: keep-all;
 `;
-const subHeader = theme => css`
+const subHeader = (theme) => css`
   display: inline-block;
   background: ${theme.primaryColor};
   color: ${theme.background};

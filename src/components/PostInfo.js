@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import { Tags } from '.';
 const info = css`
   font-size: 0.8rem;

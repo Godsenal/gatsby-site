@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql, Link } from 'gatsby';
 import { DiscussionEmbed } from 'disqus-react';
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import { Banner, Content, HEAD, Layout, PostInfo, Profile, Title, Toc } from '../components';
 
 const DISQUS_NAME = 'godsenal-1';

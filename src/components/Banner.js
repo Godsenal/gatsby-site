@@ -1,7 +1,7 @@
 import React from 'react';
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 
-const bannerBox = banner => css`
+const bannerBox = (banner) => css`
   background-image: url(${banner});
   background-repeat: no-repeat;
   background-size: cover;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import { HEADER_HEIGHT, screen } from '../constants';
 import useEventListener from '../hooks/useEventListener';
 
@@ -19,6 +19,9 @@ const toc = (scrolled) => css`
   `}
   width: 220px;
   font-size: 0.8rem;
+  ul {
+    margin-left: 10px;
+  }
   ul,
   li {
     list-style-type: none;
