@@ -1,7 +1,17 @@
 import React from 'react';
 import { graphql, Link } from 'gatsby';
 import { css } from '@emotion/core';
-import { Banner, Content, Disqus, HEAD, Layout, PostInfo, Profile, Title, Toc } from '../components';
+import {
+  Banner,
+  Content,
+  Disqus,
+  HEAD,
+  Layout,
+  PostInfo,
+  Profile,
+  Title,
+  Toc,
+} from '../components';
 
 const prevOrNext = css`
   display: flex;
@@ -30,7 +40,6 @@ const listContainer = css`
 const Template = ({ data, pageContext, location }) => {
   const { markdownRemark } = data;
   const { id, html, timeToRead, excerpt, tableOfContents, frontmatter } = markdownRemark;
-  console.log(tableOfContents);
   const { title, date, banner, tags } = frontmatter;
   const { previous, next } = pageContext;
 
@@ -66,7 +75,7 @@ const Template = ({ data, pageContext, location }) => {
 export default Template;
 
 export const query = graphql`
-  query($slug: String!) {
+  query ($slug: String!) {
     markdownRemark(fields: { slug: { eq: $slug } }) {
       id
       html
