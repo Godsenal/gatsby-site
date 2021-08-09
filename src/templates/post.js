@@ -1,17 +1,10 @@
 import React from 'react';
 import { graphql, Link } from 'gatsby';
+import { DiscussionEmbed } from 'disqus-react';
 import { css } from '@emotion/core';
-import {
-  Banner,
-  Content,
-  Disqus,
-  HEAD,
-  Layout,
-  PostInfo,
-  Profile,
-  Title,
-  Toc,
-} from '../components';
+import { Banner, Content, HEAD, Layout, PostInfo, Profile, Title, Toc } from '../components';
+
+const DISQUS_NAME = 'godsenal-1';
 
 const prevOrNext = css`
   display: flex;
@@ -67,7 +60,15 @@ const Template = ({ data, pageContext, location }) => {
           </Link>
         )}
       </div>
-      <Disqus id={id} url={location.href} />
+      <DiscussionEmbed
+        shortname={DISQUS_NAME}
+        config={{
+          url: location.href,
+          identifier: id,
+          title,
+          language: 'ko',
+        }}
+      />
     </Layout>
   );
 };

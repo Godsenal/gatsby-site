@@ -3,7 +3,6 @@ import Banner from './Banner';
 import Categories from './Categories';
 import Content from './Content';
 import CustomLink from './CustomLink';
-import Disqus from './Disqus';
 import HEAD from './HEAD';
 import Header from './Header';
 import Layout from './Layout';
@@ -26,7 +25,6 @@ export {
   Categories,
   Content,
   CustomLink,
-  Disqus,
   HEAD,
   Header,
   Layout,
@@ -41,5 +39,5 @@ export {
   SimplePost,
   Tags,
   Title,
-  Toc
+  Toc,
 };
