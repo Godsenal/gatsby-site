@@ -50,6 +50,8 @@ const icon = css`
   outline: none;
   cursor: pointer;
   vertical-align: middle;
+
+  padding: 0px 10px;
 `;
 const link = css`
   margin-right: 20px;
@@ -144,7 +146,7 @@ const Menus = [
 ];
 
 const Header = () => {
-  const [mounted, setMounted] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
   const [overHeight, setOverHeight] = useState(false);
   const [fixHeader, setFixHeader] = useState(false);
@@ -153,7 +155,7 @@ const Header = () => {
   const $moreMenu = useRef();
   const handleOpenSearch = () => setOpenSearch(true);
   const handleCloseSearch = () => setOpenSearch(false);
-  const isPc = useMedia(`(min-width: ${screen.small}px)`);
+  const isPc = useMedia(`(min-width: ${screen.small}px)`, false);
 
   const handleClick = (e) => {
     if (showMoreMenu && !$moreMenu.current?.contains(e.target)) {
@@ -172,7 +174,7 @@ const Header = () => {
   useEventListener('click', handleClick);
 
   useEffect(() => {
-    setMounted(true);
+    setIsMounted(true);
     handleScroll();
   }, []);
 
@@ -224,7 +226,7 @@ const Header = () => {
               <button css={icon} onClick={handleOpenSearch}>
                 <MdSearch />
               </button>
-              {mounted && (
+              {isMounted && (
                 <ThemeToggler>
                   {({ theme, toggleTheme }) => (
                     <button
