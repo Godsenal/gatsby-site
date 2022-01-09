@@ -1,7 +1,6 @@
 import React from 'react';
 import { css } from '@emotion/react';
 import { StaticQuery, graphql } from 'gatsby';
-import { useTheme } from '../theme';
 
 const query = graphql`
   {
@@ -15,11 +14,11 @@ const query = graphql`
     }
   }
 `;
-const container = (primaryColor) => css`
+const container = css`
   margin: 3rem 0;
   padding: 10px;
   padding-right: 30px;
-  border-right: 5px solid ${primaryColor};
+  border-right: 5px solid var(--primary);
   text-align: right;
 `;
 const text = css`
@@ -35,15 +34,13 @@ const link = css`
   }
 `;
 const Profile = () => {
-  const { theme } = useTheme();
-
   return (
     <StaticQuery
       query={query}
       render={(data) => {
         const { email, github } = data.site.siteMetadata.profile;
         return (
-          <div css={container(theme.primaryColor)}>
+          <div css={container}>
             <span>Godsenal</span>
             <p css={text}>
               안녕하세요. 개발 공부 중인 학생입니다.

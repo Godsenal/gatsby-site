@@ -8,11 +8,10 @@ import {
 } from 'react-instantsearch-dom';
 import { css } from '@emotion/react';
 import algoliasearch from 'algoliasearch/lite';
-import { ThemeContext } from '../theme';
 import { CustomLink } from '../components';
 import { screen } from '../constants';
 
-const searchContainer = (theme, open) => css`
+const searchContainer = (open) => css`
   position: fixed;
   top: 200px;
   left: 50%;
@@ -21,7 +20,7 @@ const searchContainer = (theme, open) => css`
   padding: 20px;
   box-shadow: 0 3px 20px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
-  background: ${theme.background};
+  background: var(--bg);
 
   z-index: 105;
 
@@ -51,10 +50,14 @@ const searchBox = css`
     border: none;
     border-bottom: 1px solid #ccc;
     background-color: inherit;
+    color: var(--text);
   }
   button {
     border: none;
     outline: none;
+  }
+  svg {
+    fill: var(--text);
   }
 `;
 const hitList = css`
@@ -90,7 +93,6 @@ const SearchResults = connectStateResults(({ searchState, searchResults, childre
   return children;
 });
 class Search extends Component {
-  static contextType = ThemeContext;
   wrapper = createRef();
   componentDidMount() {
     window.addEventListener('mousedown', this.handleMousedown);
@@ -116,7 +118,7 @@ class Search extends Component {
     );
 
     return (
-      <div css={searchContainer(this.context.theme, open)} ref={this.wrapper}>
+      <div css={searchContainer(open)} ref={this.wrapper}>
         <InstantSearch searchClient={searchClient} indexName="gatsby_site">
           <div css={container}>
             <div css={searchBox}>
