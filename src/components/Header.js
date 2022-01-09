@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { css } from '@emotion/react';
 import { graphql, StaticQuery } from 'gatsby';
 import { ThemeToggler } from 'gatsby-plugin-dark-mode';
+import { MdSearch, MdLightMode, MdDarkMode, MdMoreVert, MdClose } from 'react-icons/md';
 import { screen, HEADER_HEIGHT } from '../constants';
 import useEventListener from '../hooks/useEventListener';
 import { CustomLink, Search } from '.';
@@ -15,6 +16,10 @@ const header = css`
   display: flex;
   align-items: center;
   transition: margin-top 0.3s ease-in;
+
+  svg {
+    vertical-align: middle;
+  }
 `;
 const logo = css`
   flex: 0;
@@ -31,8 +36,10 @@ const menu = css`
   display: flex;
   overflow-x: auto;
   overflow-y: hidden;
+  visibility: hidden;
 
   @media screen and (min-width: ${screen.small}px) {
+    visibility: visible;
     justify-content: flex-end;
   }
 `;
@@ -40,10 +47,49 @@ const icon = css`
   border: none;
   outline: none;
   cursor: pointer;
+  vertical-align: middle;
 `;
 const link = css`
   margin-right: 20px;
 `;
+
+const moreMenuWrapper = css`
+  position: relative;
+
+  @media screen and (min-width: ${screen.small}px) {
+    display: none;
+  }
+`;
+
+const moreMenu = css`
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: var(--secondary);
+  padding: 10px 20px;
+  z-index: 150;
+  border-radius: 10px;
+  box-shadow: inset 0 1px 0 0 rgb(255 255 255 / 5%);
+
+  @media screen and (min-width: ${screen.small}px) {
+    display: none;
+  }
+`;
+
+const moreMenuClose = css`
+  ${icon}
+
+  position: absolute;
+  top: 5px;
+  right: 5px;
+`;
+
+const moreMenuItem = css`
+  & + & {
+    margin-top: 10px;
+  }
+`;
+
 const query = graphql`
   query {
     site {
@@ -65,24 +111,55 @@ const fixedStyle = {
   boxShadow: 'rgba(0, 0, 0, 0.08) 0px 0px 8px',
 };
 
+const Menus = [
+  {
+    label: 'Blog',
+    to: '/blog',
+  },
+  {
+    label: 'Categories',
+    to: '/categories',
+  },
+  {
+    label: 'Tags',
+    to: '/tags',
+  },
+  {
+    label: 'About',
+    to: '/about',
+  },
+];
+
 const Header = () => {
+  const [mounted, setMounted] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
   const [overHeight, setOverHeight] = useState(false);
   const [fixHeader, setFixHeader] = useState(false);
+  const [showMoreMenu, setShowMoreMenu] = useState(false);
   const prevScroll = useRef();
+  const $moreMenu = useRef();
   const handleOpenSearch = () => setOpenSearch(true);
   const handleCloseSearch = () => setOpenSearch(false);
 
+  const handleClick = (e) => {
+    if (showMoreMenu && !$moreMenu.current?.contains(e.target)) {
+      setShowMoreMenu(false);
+    }
+  };
+
   const handleScroll = () => {
     const isOverHeight = window.scrollY > HEADER_HEIGHT;
+    setShowMoreMenu(false);
     setOverHeight(isOverHeight);
     setFixHeader(prevScroll.current > window.scrollY);
     prevScroll.current = window.scrollY;
   };
 
   useEventListener('scroll', handleScroll, { passive: true });
+  useEventListener('click', handleClick);
 
   useEffect(() => {
+    setMounted(true);
     handleScroll();
   }, []);
 
@@ -109,38 +186,46 @@ const Header = () => {
                 </CustomLink>
               </div>
               <div css={menu}>
-                <CustomLink to="/blog" css={link}>
-                  Blog
-                </CustomLink>
-                {/* <CustomLink to="/project" css={link}>
-                Project
-              </CustomLink> */}
-                <CustomLink to="/categories" css={link}>
-                  Categories
-                </CustomLink>
-                <CustomLink to="/tags" css={link}>
-                  Tags
-                </CustomLink>
-                <CustomLink to="/about" css={link}>
-                  About
-                </CustomLink>
+                {Menus.map(({ label, to }) => (
+                  <CustomLink key={to} to={to} css={link}>
+                    {label}
+                  </CustomLink>
+                ))}
               </div>
               <button css={icon} onClick={handleOpenSearch}>
-                <span role="img" aria-label="search">
-                  🔍
-                </span>
+                <MdSearch />
               </button>
-              <ThemeToggler>
-                {({ theme, toggleTheme }) => (
-                  <button
-                    css={icon}
-                    onClick={() => toggleTheme(theme === 'dark' ? 'light' : 'dark')}
-                  >
-                    {theme === 'dark' ? '☀️' : '🌙'}
-                  </button>
+              {mounted && (
+                <ThemeToggler>
+                  {({ theme, toggleTheme }) => (
+                    <button
+                      css={icon}
+                      onClick={() => toggleTheme(theme === 'dark' ? 'light' : 'dark')}
+                    >
+                      {theme === 'dark' ? <MdLightMode /> : <MdDarkMode />}
+                    </button>
+                  )}
+                </ThemeToggler>
+              )}
+              <div css={moreMenuWrapper}>
+                <button css={icon} onClick={() => setShowMoreMenu(true)}>
+                  <MdMoreVert />
+                </button>
+                {showMoreMenu && (
+                  <div css={moreMenu} ref={$moreMenu}>
+                    <button css={moreMenuClose} onClick={() => setShowMoreMenu(false)}>
+                      <MdClose />
+                    </button>
+                    {Menus.map(({ label, to }, i) => (
+                      <div key={to} css={moreMenuItem}>
+                        <CustomLink to={to} css={link}>
+                          {label}
+                        </CustomLink>
+                      </div>
+                    ))}
+                  </div>
                 )}
-              </ThemeToggler>
-
+              </div>
               <Search open={openSearch} handleClose={handleCloseSearch} />
             </div>
           );

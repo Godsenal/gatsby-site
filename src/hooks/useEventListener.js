@@ -8,8 +8,8 @@ const useEventListener = (event, handler, eventOptions = {}) => {
   }, [handler]);
 
   useEffect(() => {
-    const eventHandler = () => {
-      handlerRef.current();
+    const eventHandler = (...args) => {
+      handlerRef.current(...args);
     };
     window.addEventListener(event, eventHandler, eventOptions);
 
