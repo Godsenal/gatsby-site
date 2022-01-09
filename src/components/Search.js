@@ -43,14 +43,15 @@ const searchBox = css`
   form {
     width: 100%;
     display: flex;
+    margin-bottom: 0;
   }
   input {
     width: 90%;
     outline: none;
     border: none;
-    border-bottom: 1px solid #ccc;
     background: transparent;
     color: var(--text);
+    -webkit-appearance: none;
   }
   button {
     border: none;
@@ -63,6 +64,7 @@ const searchBox = css`
 const hitList = css`
   overflow-y: auto;
   max-height: 500px;
+  margin-top: 1.75rem;
   ul {
     margin: 0;
   }
