@@ -3,6 +3,8 @@ import { css } from '@emotion/react';
 import { graphql, StaticQuery } from 'gatsby';
 import { ThemeToggler } from 'gatsby-plugin-dark-mode';
 import { MdSearch, MdLightMode, MdDarkMode, MdMoreVert, MdClose } from 'react-icons/md';
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
+import { useMedia } from 'react-use';
 import { screen, HEADER_HEIGHT } from '../constants';
 import useEventListener from '../hooks/useEventListener';
 import { CustomLink, Search } from '.';
@@ -90,6 +92,17 @@ const moreMenuItem = css`
   }
 `;
 
+const dimmed = css`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(2px);
+  z-index: 100;
+`;
+
 const query = graphql`
   query {
     site {
@@ -140,6 +153,7 @@ const Header = () => {
   const $moreMenu = useRef();
   const handleOpenSearch = () => setOpenSearch(true);
   const handleCloseSearch = () => setOpenSearch(false);
+  const isPc = useMedia(`(min-width: ${screen.small}px)`);
 
   const handleClick = (e) => {
     if (showMoreMenu && !$moreMenu.current?.contains(e.target)) {
@@ -149,7 +163,6 @@ const Header = () => {
 
   const handleScroll = () => {
     const isOverHeight = window.scrollY > HEADER_HEIGHT;
-    setShowMoreMenu(false);
     setOverHeight(isOverHeight);
     setFixHeader(prevScroll.current > window.scrollY);
     prevScroll.current = window.scrollY;
@@ -162,6 +175,22 @@ const Header = () => {
     setMounted(true);
     handleScroll();
   }, []);
+
+  useEffect(() => {
+    if (showMoreMenu && $moreMenu.current) {
+      const $target = $moreMenu.current;
+
+      disableBodyScroll($target);
+
+      return () => {
+        enableBodyScroll($target);
+      };
+    }
+  }, [showMoreMenu]);
+
+  useEffect(() => {
+    isPc && setShowMoreMenu(false);
+  }, [isPc]);
 
   return (
     <>
@@ -212,18 +241,21 @@ const Header = () => {
                   <MdMoreVert />
                 </button>
                 {showMoreMenu && (
-                  <div css={moreMenu} ref={$moreMenu}>
-                    <button css={moreMenuClose} onClick={() => setShowMoreMenu(false)}>
-                      <MdClose />
-                    </button>
-                    {Menus.map(({ label, to }, i) => (
-                      <div key={to} css={moreMenuItem}>
-                        <CustomLink to={to} css={link}>
-                          {label}
-                        </CustomLink>
-                      </div>
-                    ))}
-                  </div>
+                  <>
+                    <div css={dimmed} />
+                    <div css={moreMenu} ref={$moreMenu}>
+                      <button css={moreMenuClose} onClick={() => setShowMoreMenu(false)}>
+                        <MdClose />
+                      </button>
+                      {Menus.map(({ label, to }, i) => (
+                        <div key={to} css={moreMenuItem}>
+                          <CustomLink to={to} css={link}>
+                            {label}
+                          </CustomLink>
+                        </div>
+                      ))}
+                    </div>
+                  </>
                 )}
               </div>
               <Search open={openSearch} handleClose={handleCloseSearch} />

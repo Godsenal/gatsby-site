@@ -15,6 +15,10 @@ const Theme = {
   boldWeight: 500,
   includeNormalize: true,
   overrideStyles: () => ({
+    html: {
+      // overflowY 를 scroll 로 넣어주고 있어서 body-scroll-lock이 안먹힘
+      overflowY: 'initial',
+    },
     code: {
       fontSize: '1em',
     },
