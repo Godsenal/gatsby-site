@@ -49,7 +49,7 @@ const searchBox = css`
     outline: none;
     border: none;
     border-bottom: 1px solid #ccc;
-    background-color: inherit;
+    background: transparent;
     color: var(--text);
   }
   button {
