@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { css } from '@emotion/react';
 import { graphql, StaticQuery } from 'gatsby';
+import { ThemeToggler } from 'gatsby-plugin-dark-mode';
 import { screen, HEADER_HEIGHT } from '../constants';
 import useEventListener from '../hooks/useEventListener';
 import { CustomLink, Search } from '.';
@@ -60,7 +61,7 @@ const fixedStyle = {
   left: 0,
   padding: '0 5% 0 5%',
   zIndex: 10,
-  backgroundColor: 'white',
+  backgroundColor: 'var(--bg)',
   boxShadow: 'rgba(0, 0, 0, 0.08) 0px 0px 8px',
 };
 
@@ -129,6 +130,17 @@ const Header = () => {
                   🔍
                 </span>
               </button>
+              <ThemeToggler>
+                {({ theme, toggleTheme }) => (
+                  <button
+                    css={icon}
+                    onClick={() => toggleTheme(theme === 'dark' ? 'light' : 'dark')}
+                  >
+                    {theme === 'dark' ? '☀️' : '🌙'}
+                  </button>
+                )}
+              </ThemeToggler>
+
               <Search open={openSearch} handleClose={handleCloseSearch} />
             </div>
           );

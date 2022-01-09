@@ -13,6 +13,7 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-emotion`,
+    `gatsby-plugin-dark-mode`,
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-plugin-typography`,

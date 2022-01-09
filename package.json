@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@emotion/core": "^11.0.0",
+    "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.3.0",
     "algoliasearch": "^4.10.3",
     "chalk": "^4.1.2",
@@ -24,6 +25,7 @@
     "dotenv": "^10.0.0",
     "emotion-theming": "^11.0.0",
     "gatsby": "^3.12.0",
+    "gatsby-plugin-dark-mode": "^1.1.2",
     "gatsby-plugin-emotion": "^6.12.0",
     "gatsby-plugin-google-analytics": "^3.12.0",
     "gatsby-plugin-manifest": "^3.12.0",

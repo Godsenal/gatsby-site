@@ -10,7 +10,7 @@ const container = css`
 `;
 const tagItem = css`
   box-sizing: border-box;
-  background-color: #fbf2e9;
+  background-color: var(--secondary);
   padding: 0px 5px;
   border-radius: 5px;
   margin: 5px 10px 5px 0px;

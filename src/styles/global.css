@@ -1,6 +1,20 @@
 body {
+  --bg: #fefefe;
+  --text: #2f3e54;
+  --primary: #444494;
+  --secondary: #fbf2e9;
+
   overflow-y: auto;
+  color: var(--text);
+  background-color: var(--bg);
 }
+body.dark {
+  --bg: #222831;
+  --text: #cbd4d9;
+  --primary: #cbc3e3;
+  --secondary: #393e46;
+}
+
 h1 {
   font-size: 1.6rem;
 }
@@ -14,7 +28,9 @@ h4,
 h5 {
   line-height: 40px;
 }
+
 a {
+  color: var(--primary);
   text-decoration: none;
   outline: none;
   transition: opacity 0.1s ease-in-out;
@@ -25,6 +41,8 @@ a:hover {
   opacity: 0.7;
 }
 button {
+  color: var(--primary);
+  background-color: var(--secondary);
   font-family: 'Open Sans';
   background: inherit;
 }
