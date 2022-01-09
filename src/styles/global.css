@@ -16,6 +16,14 @@ body.dark {
   --secondary: #393e46;
 }
 
+body.dark .dark-hidden {
+  display: none;
+}
+
+body.dark .dark-inline-block {
+  display: inline-block;
+}
+
 h1 {
   font-size: 1.6rem;
 }

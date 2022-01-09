@@ -53,6 +53,15 @@ const icon = css`
 
   padding: 0px 10px;
 `;
+
+const themeIcon = css`
+  ${icon}
+
+  .dark-inline-block {
+    display: none;
+  }
+`;
+
 const link = css`
   margin-right: 20px;
 `;
@@ -146,7 +155,6 @@ const Menus = [
 ];
 
 const Header = () => {
-  const [isMounted, setIsMounted] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
   const [overHeight, setOverHeight] = useState(false);
   const [fixHeader, setFixHeader] = useState(false);
@@ -174,7 +182,6 @@ const Header = () => {
   useEventListener('click', handleClick);
 
   useEffect(() => {
-    setIsMounted(true);
     handleScroll();
   }, []);
 
@@ -226,18 +233,17 @@ const Header = () => {
               <button css={icon} onClick={handleOpenSearch}>
                 <MdSearch />
               </button>
-              {isMounted && (
-                <ThemeToggler>
-                  {({ theme, toggleTheme }) => (
-                    <button
-                      css={icon}
-                      onClick={() => toggleTheme(theme === 'dark' ? 'light' : 'dark')}
-                    >
-                      {theme === 'dark' ? <MdLightMode /> : <MdDarkMode />}
-                    </button>
-                  )}
-                </ThemeToggler>
-              )}
+              <ThemeToggler>
+                {({ theme, toggleTheme }) => (
+                  <button
+                    css={themeIcon}
+                    onClick={() => toggleTheme(theme === 'dark' ? 'light' : 'dark')}
+                  >
+                    <MdLightMode className="dark-inline-block" />
+                    <MdDarkMode className="dark-hidden" />
+                  </button>
+                )}
+              </ThemeToggler>
               <div css={moreMenuWrapper}>
                 <button css={icon} onClick={() => setShowMoreMenu(true)}>
                   <MdMoreVert />
