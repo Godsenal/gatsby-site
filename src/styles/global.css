@@ -4,6 +4,7 @@ body {
   --primary: #444494;
   --secondary: #fbf2e9;
 
+  width: 100%;
   overflow-y: auto;
   color: var(--text);
   background-color: var(--bg);
