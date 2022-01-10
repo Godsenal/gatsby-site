@@ -20,7 +20,7 @@ const query = graphql`
   }
 `;
 
-const Head = ({ title, description, image, pathname, article }) => (
+const Head = ({ title, description, image, pathname, article, tags }) => (
   <StaticQuery
     query={query}
     render={({
@@ -41,6 +41,7 @@ const Head = ({ title, description, image, pathname, article }) => (
         image: `${siteUrl}${image || defaultImage}`,
         url: `${siteUrl}${pathname || '/'}`,
         favicon: `${siteUrl}${favicon}`,
+        keywords: (tags || []).join(','),
       };
 
       return (
@@ -72,6 +73,7 @@ const Head = ({ title, description, image, pathname, article }) => (
           >
             <meta name="description" content={seo.description} />
             <meta name="image" content={seo.image} />
+            {seo.keywords && <meta name="keywords" content={seo.keywords} />}
             {seo.url && <meta property="og:url" content={seo.url} />}
             {(article ? true : null) && <meta property="og:type" content="article" />}
             {seo.title && <meta property="og:title" content={seo.title} />}

@@ -15,9 +15,9 @@ const Categories = ({ categories, categoriesCount, ...props }) => (
   <>
     {categories &&
       categories.map((category) => (
-        <div css={categoryItem}>
+        <div css={categoryItem} key={category}>
           <h1>
-            <CustomLink key={category} to={`/categories/${category}`} {...props}>
+            <CustomLink to={`/categories/${category}`} {...props}>
               {category}
             </CustomLink>
           </h1>

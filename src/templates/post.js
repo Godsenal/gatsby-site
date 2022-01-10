@@ -71,7 +71,7 @@ const Template = ({ data, pageContext, location }) => {
 
   return (
     <Layout>
-      <HEAD title={title} pathname={location.pathname} description={excerpt} />
+      <HEAD title={title} pathname={location.pathname} description={excerpt} tags={tags} />
       <Title h1={title} />
       <Toc tableOfContents={tableOfContents} activeHash={activeHash} />
       <PostInfo date={date} timeToRead={timeToRead} tags={tags} />
