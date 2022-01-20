@@ -50,6 +50,9 @@ a {
 a:hover {
   opacity: 0.7;
 }
+a.anchor svg {
+  fill: var(--primary);
+}
 button {
   color: var(--primary);
   background-color: var(--secondary);
