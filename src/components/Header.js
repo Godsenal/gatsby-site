@@ -7,7 +7,7 @@ import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { useMedia } from 'react-use';
 import { screen, HEADER_HEIGHT } from '../constants';
 import useEventListener from '../hooks/useEventListener';
-import { CustomLink, Search } from '.';
+import { CustomLink, Search, Blind } from '.';
 
 const header = css`
   width: 90%;
@@ -98,6 +98,10 @@ const moreMenuClose = css`
 `;
 
 const moreMenuItem = css`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
   & + & {
     margin-top: 10px;
   }
@@ -164,6 +168,7 @@ const Header = () => {
   const handleOpenSearch = () => setOpenSearch(true);
   const handleCloseSearch = () => setOpenSearch(false);
   const isPc = useMedia(`(min-width: ${screen.small}px)`, false);
+  const [isMounted, setIsMounted] = useState(false);
 
   const handleClick = (e) => {
     if (showMoreMenu && !$moreMenu.current?.contains(e.target)) {
@@ -182,6 +187,7 @@ const Header = () => {
   useEventListener('click', handleClick);
 
   useEffect(() => {
+    setIsMounted(true);
     handleScroll();
   }, []);
 
@@ -231,38 +237,54 @@ const Header = () => {
                 ))}
               </div>
               <button css={icon} onClick={handleOpenSearch}>
+                <Blind>검색</Blind>
                 <MdSearch />
               </button>
               <ThemeToggler>
-                {({ theme, toggleTheme }) => (
-                  <button
-                    css={themeIcon}
-                    onClick={() => toggleTheme(theme === 'dark' ? 'light' : 'dark')}
-                  >
-                    <MdLightMode className="dark-inline-block" />
-                    <MdDarkMode className="dark-hidden" />
-                  </button>
-                )}
+                {({ theme, toggleTheme }) => {
+                  const nextTheme = theme === 'dark' ? 'light' : 'dark';
+                  return (
+                    <button css={themeIcon} onClick={() => toggleTheme(nextTheme)}>
+                      {isMounted && <Blind>{nextTheme}로 변경</Blind>}
+                      <MdLightMode className="dark-inline-block" />
+                      <MdDarkMode className="dark-hidden" />
+                    </button>
+                  );
+                }}
               </ThemeToggler>
               <div css={moreMenuWrapper}>
-                <button css={icon} onClick={() => setShowMoreMenu(true)}>
+                <button
+                  id="moremenu_button"
+                  css={icon}
+                  onClick={() => setShowMoreMenu(true)}
+                  aria-haspopup={true}
+                  aria-controls="navigation_moremenu"
+                  aria-expanded={showMoreMenu}
+                >
+                  <Blind>네비게이션</Blind>
                   <MdMoreVert />
                 </button>
                 {showMoreMenu && (
                   <>
                     <div css={dimmed} />
-                    <div css={moreMenu} ref={$moreMenu}>
+                    <ul
+                      id="navigation_moremenu"
+                      css={moreMenu}
+                      ref={$moreMenu}
+                      aria-labelledby="moremenu_button"
+                    >
                       <button css={moreMenuClose} onClick={() => setShowMoreMenu(false)}>
+                        <Blind>닫기</Blind>
                         <MdClose />
                       </button>
                       {Menus.map(({ label, to }, i) => (
-                        <div key={to} css={moreMenuItem}>
-                          <CustomLink to={to} css={link}>
+                        <li key={to} css={moreMenuItem}>
+                          <CustomLink role="menuitem" to={to} css={link}>
                             {label}
                           </CustomLink>
-                        </div>
+                        </li>
                       ))}
-                    </div>
+                    </ul>
                   </>
                 )}
               </div>

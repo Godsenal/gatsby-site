@@ -1,5 +1,6 @@
 import Avatar from './Avatar';
 import Banner from './Banner';
+import Blind from './Blind';
 import Categories from './Categories';
 import Content from './Content';
 import CustomLink from './CustomLink';
@@ -22,6 +23,7 @@ import Toc from './Toc';
 export {
   Avatar,
   Banner,
+  Blind,
   Categories,
   Content,
   CustomLink,

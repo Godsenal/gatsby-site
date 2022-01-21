@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from '@emotion/react';
-import profileImg from '../images/me.png';
+import profileImg from '../images/me.webp';
 
 const imgStyle = css`
   width: 128px;

@@ -71,6 +71,7 @@ const Head = ({ title, description, image, pathname, article, tags }) => (
               { rel: 'shortcut icon', type: 'image/png', href: `${favicon128}` },
             ]}
           >
+            <html lang="ko" />
             <meta name="description" content={seo.description} />
             <meta name="image" content={seo.image} />
             {seo.keywords && <meta name="keywords" content={seo.keywords} />}
