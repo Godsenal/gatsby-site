@@ -41,7 +41,7 @@
     "inquirer": "^8.1.2",
     "inquirer-autocomplete-prompt": "^1.4.0",
     "lodash": "^4.17.21",
-    "ora": "^5.4.1",
+    "ora": "^6.1.0",
     "prismjs": "^1.24.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
