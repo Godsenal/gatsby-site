@@ -18,7 +18,7 @@
     "@emotion/core": "^11.0.0",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.3.0",
-    "algoliasearch": "^4.10.3",
+    "algoliasearch": "^4.12.2",
     "body-scroll-lock": "^3.1.5",
     "chalk": "^4.1.2",
     "date-fns": "^2.23.0",
