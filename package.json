@@ -39,7 +39,7 @@
     "gatsby-transformer-remark": "^5.9.1",
     "gray-matter": "^4.0.3",
     "inquirer": "^8.2.1",
-    "inquirer-autocomplete-prompt": "^1.4.0",
+    "inquirer-autocomplete-prompt": "^2.0.0",
     "lodash": "^4.17.21",
     "ora": "^5.4.1",
     "prismjs": "^1.27.0",
