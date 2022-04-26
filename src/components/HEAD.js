@@ -74,6 +74,7 @@ const Head = ({ title, description, image, pathname, article, tags }) => (
             <html lang="ko" />
             <meta name="description" content={seo.description} />
             <meta name="image" content={seo.image} />
+            <script src="https://www.googleoptimize.com/optimize.js?id=OPT-P8HB7WJ"></script>
             {seo.keywords && <meta name="keywords" content={seo.keywords} />}
             {seo.url && <meta property="og:url" content={seo.url} />}
             {(article ? true : null) && <meta property="og:type" content="article" />}
