@@ -12,6 +12,7 @@ module.exports = {
     },
   },
   plugins: [
+    `gatsby-plugin-sharp`,
     `gatsby-plugin-emotion`,
     `gatsby-plugin-dark-mode`,
     `gatsby-plugin-react-helmet`,
@@ -55,6 +56,12 @@ module.exports = {
               noInlineHighlight: false,
             },
           },
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 1200,
+            },
+          },
         ],
       },
     },
@@ -63,6 +70,12 @@ module.exports = {
       options: {
         name: `post`,
         path: `${__dirname}/src/pages/`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/src/images/`,
       },
     },
     // {
