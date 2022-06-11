@@ -16,15 +16,12 @@ const log = console.log;
 const { promisify } = require('util');
 inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
 
+const glob = promisify(require('glob'));
 const writeFile = promisify(fs.writeFile);
-const readdir = promisify(fs.readdir);
 
-const postPath = path.resolve(process.cwd(), 'src', 'pages', 'posts');
+const postsPath = path.resolve(process.cwd(), 'src', 'pages', 'posts');
 
-const readPosts = async () => {
-  const posts = await readdir(postPath);
-  return posts;
-};
+const readPosts = () => glob(`${postsPath}/**/index.md`);
 const handleTitle = async (titleList) => {
   const { title } = await inquirer.prompt({
     name: 'title',
@@ -111,10 +108,10 @@ const fetchMatters = (posts) => {
   const titleSet = new Set();
   const categorySet = new Set();
   const tagSet = new Set();
-  posts.forEach((filename) => {
+  posts.forEach((file) => {
     const {
       data: { title, categories, tags },
-    } = matter.read(`${postPath}/${filename}`);
+    } = matter.read(file);
     title && titleSet.add(title);
     categories && categorySet.add(...categories);
     tags && tagSet.add(...tags);
@@ -126,9 +123,15 @@ const createMatters = (matters) => {
 };
 const createPost = async (title, matters) => {
   const titleWithBar = title.replace(/ /gi, '-');
-  const createPath = `${postPath}/${titleWithBar}.md`;
-  await writeFile(createPath, matters);
-  return createPath;
+  const directoryPath = `${postsPath}/${titleWithBar}`;
+
+  if (!fs.existsSync(directoryPath)) {
+    fs.mkdirSync(directoryPath);
+  }
+
+  const postPath = `${directoryPath}/index.md`;
+  await writeFile(postPath, matters);
+  return postPath;
 };
 
 const startCommand = async (titleList, categoryList, tagList) => {
@@ -145,6 +148,8 @@ const startCommand = async (titleList, categoryList, tagList) => {
     const createdPath = await createPost(title, matters);
     spinner.succeed('Done!');
     log(chalk.green(`You can find created post ${chalk.blue(createdPath)}`));
+    require('child_process').exec(`code ${createdPath}`);
+
     return true;
   }
   return false;
