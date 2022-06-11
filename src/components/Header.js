@@ -1,13 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { css } from '@emotion/react';
 import { graphql, StaticQuery } from 'gatsby';
-import { ThemeToggler } from 'gatsby-plugin-dark-mode';
 import { MdSearch, MdLightMode, MdDarkMode, MdMoreVert, MdClose } from 'react-icons/md';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { useMedia } from 'react-use';
 import { screen, HEADER_HEIGHT } from '../constants';
 import useEventListener from '../hooks/useEventListener';
-import { CustomLink, Search, Blind } from '.';
+import { CustomLink, Search, Blind, ThemeToggler } from '.';
 
 const header = css`
   width: 90%;

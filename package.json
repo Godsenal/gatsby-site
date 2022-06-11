@@ -26,7 +26,6 @@
     "dotenv": "^10.0.0",
     "emotion-theming": "^11.0.0",
     "gatsby": "^4.9.3",
-    "gatsby-plugin-dark-mode": "^1.1.2",
     "gatsby-plugin-emotion": "^7.9.0",
     "gatsby-plugin-google-gtag": "^4.9.0",
     "gatsby-plugin-image": "^2.16.1",

@@ -16,6 +16,7 @@ import ProjectList from './ProjectList';
 import Search from './Search';
 import SimplePost from './SimplePost';
 import Tags from './Tags';
+import ThemeToggler from './ThemeToggler';
 import Title from './Title';
 import Toc from './Toc';
 
@@ -38,6 +39,7 @@ export {
   Search,
   SimplePost,
   Tags,
+  ThemeToggler,
   Title,
   Toc,
 };
