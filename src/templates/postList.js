@@ -37,7 +37,11 @@ export const query = graphql`
           frontmatter {
             title
             date
-            banner
+            banner {
+              childImageSharp {
+                gatsbyImageData(width: 1200)
+              }
+            }
             tags
             categories
           }

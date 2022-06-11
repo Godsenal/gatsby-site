@@ -12,7 +12,9 @@ module.exports = {
     },
   },
   plugins: [
+    `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
     `gatsby-plugin-emotion`,
     `gatsby-plugin-dark-mode`,
     `gatsby-plugin-react-helmet`,
@@ -70,12 +72,6 @@ module.exports = {
       options: {
         name: `post`,
         path: `${__dirname}/src/pages/`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        path: `${__dirname}/src/images/`,
       },
     },
     // {

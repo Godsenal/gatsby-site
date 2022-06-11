@@ -31,7 +31,6 @@ export const query = graphql`
           frontmatter {
             title
             date
-            banner
             tags
             categories
           }

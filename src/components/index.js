@@ -1,5 +1,4 @@
 import Avatar from './Avatar';
-import Banner from './Banner';
 import Blind from './Blind';
 import Categories from './Categories';
 import Content from './Content';
@@ -22,7 +21,6 @@ import Toc from './Toc';
 
 export {
   Avatar,
-  Banner,
   Blind,
   Categories,
   Content,

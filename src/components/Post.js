@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
-import { Banner, PostInfo, CustomLink } from '.';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+import { PostInfo, CustomLink } from '.';
 
 const post = css`
   display: block;
@@ -20,9 +21,11 @@ const info = css``;
 const Post = ({ frontmatter, fields, excerpt, timeToRead }) => {
   const { slug } = fields;
   const { title, date, banner, tags } = frontmatter;
+  const image = getImage(banner);
+
   return (
     <div css={post}>
-      {banner && <Banner banner={banner} />}
+      {image && <GatsbyImage image={image} alt={title} />}
       <h3>
         <CustomLink to={slug}>{title}</CustomLink>
       </h3>

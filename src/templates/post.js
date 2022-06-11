@@ -2,7 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { graphql, Link } from 'gatsby';
 import { DiscussionEmbed } from 'disqus-react';
 import { css } from '@emotion/react';
-import { Banner, Content, HEAD, Layout, PostInfo, Profile, Title, Toc } from '../components';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+import { Content, HEAD, Layout, PostInfo, Profile, Title, Toc } from '../components';
 
 const ANCHOR_SELECTOR = '.anchor';
 const DISQUS_NAME = 'godsenal-1';
@@ -38,6 +39,7 @@ const Template = ({ data, pageContext, location }) => {
   const { id, html, timeToRead, excerpt, tableOfContents, frontmatter } = markdownRemark;
   const { title, date, banner, tags } = frontmatter;
   const { previous, next } = pageContext;
+  const image = getImage(banner);
 
   useEffect(() => {
     const anchors = $content.current.querySelectorAll(ANCHOR_SELECTOR);
@@ -75,7 +77,7 @@ const Template = ({ data, pageContext, location }) => {
       <Title h1={title} />
       <Toc tableOfContents={tableOfContents} activeHash={activeHash} />
       <PostInfo date={date} timeToRead={timeToRead} tags={tags} />
-      {banner && <Banner banner={banner} />}
+      {image && <GatsbyImage image={image} alt={title} />}
       <Content ref={$content} dangerouslySetInnerHTML={{ __html: html }} />
       <h4 css={listContainer}>
         <Link to="/blog">» List</Link>
@@ -118,7 +120,11 @@ export const query = graphql`
       frontmatter {
         title
         date
-        banner
+        banner {
+          childImageSharp {
+            gatsbyImageData(width: 1200)
+          }
+        }
         tags
         categories
       }

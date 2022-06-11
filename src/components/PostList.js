@@ -8,6 +8,7 @@ const postList = css`
 
 const PostList = ({ simple = false, edges }) => {
   const PostListItem = simple ? SimplePost : Post;
+
   return (
     <div css={postList}>
       {edges.map((edge) => {
