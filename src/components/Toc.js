@@ -29,6 +29,7 @@ const toc = (scrolled, activeHash) => css`
     a {
       display: inline-block;
       transition: transform 0.125s ease-in;
+      text-decoration: none;
     }
 
     a[href='${activeHash}'] {
