@@ -7,6 +7,7 @@ import {
   Title,
   Layout,
   PostList,
+  Avatar,
   // ProjectList
 } from '../components';
 
@@ -19,6 +20,11 @@ const profile = css`
 const mainTitle = css`
   display: flex;
   align-items: center;
+`;
+const avatar = css`
+  width: 3.5rem;
+  height: 3.5rem;
+  margin-right: 10px;
 `;
 const linkContainer = css`
   width: 100%;
@@ -35,6 +41,7 @@ const Home = ({ data }) => {
       <div css={info}>
         <div css={profile}>
           <div css={mainTitle}>
+            <Avatar css={avatar} />
             <h1>Godsenal's site</h1>
           </div>
           <div>

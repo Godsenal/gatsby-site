@@ -7,7 +7,6 @@ import { useMedia } from 'react-use';
 import { screen, HEADER_HEIGHT } from '../constants';
 import useEventListener from '../hooks/useEventListener';
 import { CustomLink, Search, Blind, ThemeToggler } from '.';
-import { StaticImage } from 'gatsby-plugin-image';
 import { layoutWidth } from '../styles/common';
 
 const fixedHeader = (isScrollTop) => css`
@@ -28,26 +27,18 @@ const header = css`
   font-size: 1rem;
   display: flex;
   align-items: center;
-
-  svg {
-    vertical-align: middle;
-  }
 `;
 const link = css`
+  color: var(--text);
   margin-right: 20px;
 `;
 const logo = css`
   display: flex;
-  flex: 0;
-  font-size: 1.3rem;
-  font-weight: 400;
-  cursor: pointer;
-  h5 {
-    margin: 0;
+  margin: 0;
+
+  a {
+    color: var(--text);
   }
-`;
-const logoImage = css`
-  border-radius: 100%;
 `;
 const menu = css`
   flex: 1;
@@ -64,6 +55,7 @@ const menu = css`
   }
 `;
 const icon = css`
+  color: var(--text);
   border: none;
   outline: none;
   cursor: pointer;
@@ -209,23 +201,15 @@ const Header = () => {
     <>
       <StaticQuery
         query={query}
-        render={() => {
+        render={(data) => {
           return (
             <div css={fixedHeader(isScrollTop)}>
               <div css={header}>
-                <div css={logo}>
+                <h2 css={logo}>
                   <CustomLink to="/" css={link}>
-                    <StaticImage
-                      width={40}
-                      height={40}
-                      layout="fixed"
-                      src="../images/me.webp"
-                      alt="logo"
-                      css={logoImage}
-                      loading="eager"
-                    />
+                    {data?.site?.siteMetadata?.title?.toUpperCase()}
                   </CustomLink>
-                </div>
+                </h2>
                 <div css={menu}>
                   {Menus.map(({ label, to }) => (
                     <CustomLink key={to} to={to} css={link}>
