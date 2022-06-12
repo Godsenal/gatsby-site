@@ -4,6 +4,7 @@ import { DiscussionEmbed } from 'disqus-react';
 import { css } from '@emotion/react';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import { Content, HEAD, Layout, PostInfo, Profile, Title, Toc } from '../components';
+import { screen } from '../constants';
 
 const ANCHOR_SELECTOR = '.anchor';
 const DISQUS_NAME = 'godsenal-1';
@@ -14,19 +15,19 @@ const prevOrNext = css`
   justify-content: space-between;
   flex-wrap: wrap;
 `;
-const prevPost = css`
-  transition: transform 0.3s ease-in-out;
-  &:hover {
-    transform: translateX(-5px);
-    transition: transform 0.3s ease-in-out;
+
+const commonPostLink = css`
+  @media screen and (max-width: ${screen.small}px) {
+    width: 100%;
+    text-align: center;
   }
 `;
+
+const prevPost = css`
+  ${commonPostLink}
+`;
 const nextPost = css`
-  transition: transform 0.3s ease-in-out;
-  &:hover {
-    transform: translateX(5px);
-    transition: transform 0.3s ease-in-out;
-  }
+  ${commonPostLink}
 `;
 const listContainer = css`
   text-align: right;

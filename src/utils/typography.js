@@ -1,18 +1,19 @@
 import Typography from 'typography';
 
 const Theme = {
-  baseFontSize: 18,
+  baseFontSize: 17,
   baseLineHeight: 1.75,
-  headerFontFamily: ['Roboto', 'Noto Sans KR', 'sans-serif'],
-  bodyFontFamily: ['Roboto', 'Noto Sans KR', 'serif'],
+  headerFontFamily: ['Exo', 'Noto Sans KR', 'sans-serif'],
+  bodyFontFamily: ['Yrsa', 'Noto Serif KR', 'serif'],
   googleFonts: [
-    { name: 'Open Sans', styles: ['700', '700i'] },
-    { name: 'Noto Sans KR', styles: ['300', '300', '500', '500'] },
-    { name: 'Roboto', styles: ['300', '300', '500', '500'] },
+    { name: 'Exo', styles: ['400', '700'] },
+    { name: 'Yrsa', styles: ['400', '700'] },
+    { name: 'Noto Sans KR', styles: ['400', '700'] },
+    { name: 'Noto Serif KR', styles: ['400', '700'] },
   ],
-  headerWeight: 500,
-  bodyWeight: 300,
-  boldWeight: 500,
+  headerWeight: 700,
+  bodyWeight: 400,
+  boldWeight: 700,
   includeNormalize: true,
   overrideStyles: () => ({
     html: {
@@ -21,6 +22,9 @@ const Theme = {
     },
     code: {
       fontSize: '1em',
+    },
+    h1: {
+      fontSize: '3em',
     },
   }),
 };

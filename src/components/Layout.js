@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
-import { screen } from '../constants';
 import { Header } from '.';
+import { layoutWidth } from '../styles/common';
 
 const main = css`
   width: 100%;
@@ -11,16 +11,12 @@ const header = css`
 `;
 const body = css`
   position: relative;
-  width: 40%;
-  min-width: ${screen.small}px;
+
   margin: auto;
   margin-top: 5%;
   padding-bottom: 2rem;
-  @media screen and (max-width: ${screen.small}px) {
-    width: 90%;
-    min-width: 0px;
-  }
-  font-size: 1rem;
+
+  ${layoutWidth}
 `;
 
 const Layout = ({ children }) => (

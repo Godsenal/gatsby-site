@@ -3,6 +3,8 @@ body {
   --text: #2f3e54;
   --primary: #444494;
   --secondary: #fbf2e9;
+  --bg-mid: #f8f9fa;
+  --stroke: #d2d3d7;
 
   width: 100%;
   overflow-y: auto;
@@ -14,6 +16,8 @@ body.dark {
   --text: #cbd4d9;
   --primary: #cbc3e3;
   --secondary: #393e46;
+  --bg-mid: #303136;
+  --stroke: #585b63;
 }
 
 body.dark .dark-hidden {
@@ -25,7 +29,7 @@ body.dark .dark-inline-block {
 }
 
 h1 {
-  font-size: 1.6rem;
+  font-size: 2rem;
 }
 h2 {
   font-size: 1.4rem;
@@ -41,7 +45,6 @@ h5 {
 
 a {
   color: var(--primary);
-  text-decoration: none;
   outline: none;
   transition: opacity 0.1s ease-in-out;
   backface-visibility: hidden;
@@ -63,8 +66,6 @@ p {
   word-break: break-word;
 }
 blockquote {
-  color: #fefefe;
-  background-color: #2d303d;
   margin: 10px auto;
   padding: 1em !important;
   border-left: 5px solid #999;
@@ -75,14 +76,6 @@ blockquote:before {
 }
 blockquote:not(:first-of-type) {
   margin-top: 0.5em;
-}
-code {
-  font-size: 0.9rem !important;
-}
-:not(pre) > code {
-  padding: 0.2em !important;
-  background: #fbf2e9 !important;
-  color: #39343c !important;
 }
 .gatsby-highlight {
   margin: 0;

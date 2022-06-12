@@ -2,7 +2,6 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { css } from '@emotion/react';
 import {
-  Avatar,
   CustomLink,
   HEAD,
   Title,
@@ -21,11 +20,6 @@ const mainTitle = css`
   display: flex;
   align-items: center;
 `;
-const avatar = css`
-  width: 3.5rem;
-  height: 3.5rem;
-  margin-right: 10px;
-`;
 const linkContainer = css`
   width: 100%;
   margin: 2rem 0;
@@ -41,7 +35,6 @@ const Home = ({ data }) => {
       <div css={info}>
         <div css={profile}>
           <div css={mainTitle}>
-            <Avatar css={avatar} />
             <h1>Godsenal's site</h1>
           </div>
           <div>
@@ -53,7 +46,7 @@ const Home = ({ data }) => {
         </div>
       </div>
       <CustomLink to="/blog">
-        <Title h2="Blogs" />
+        <Title h2="Blog" />
       </CustomLink>
       <PostList edges={postEdges} />
       <div css={linkContainer}>

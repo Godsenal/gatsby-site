@@ -8,16 +8,18 @@ const tagList = css`
   margin-right: 0;
 `;
 const PostInfo = ({ timeToRead, date, tags }) => (
-  <>
+  <div>
     {tags && (
       <div css={info}>
         <Tags tags={tags} css={tagList} />
       </div>
     )}
-    <span css={info}>{date}</span>
-    {` · `}
-    <span css={info}>{timeToRead} 분</span>
-  </>
+    <div>
+      <span css={info}>{date}</span>
+      {` · `}
+      <span css={info}>{timeToRead} 분</span>
+    </div>
+  </div>
 );
 
 export default PostInfo;

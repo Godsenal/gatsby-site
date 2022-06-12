@@ -7,22 +7,37 @@ import { useMedia } from 'react-use';
 import { screen, HEADER_HEIGHT } from '../constants';
 import useEventListener from '../hooks/useEventListener';
 import { CustomLink, Search, Blind, ThemeToggler } from '.';
+import { StaticImage } from 'gatsby-plugin-image';
+import { layoutWidth } from '../styles/common';
 
+const fixedHeader = (isScrollTop) => css`
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background-color: var(--bg);
+  ${!isScrollTop ? 'box-shadow: 0px -2px 10px rgb(0 0 0 / 15%);' : ''}
+`;
 const header = css`
-  width: 90%;
+  ${layoutWidth}
   height: ${HEADER_HEIGHT}px;
   margin: auto;
   padding: 20px 0;
+  padding-top: 20px;
   font-size: 1rem;
   display: flex;
   align-items: center;
-  transition: margin-top 0.3s ease-in;
 
   svg {
     vertical-align: middle;
   }
 `;
+const link = css`
+  margin-right: 20px;
+`;
 const logo = css`
+  display: flex;
   flex: 0;
   font-size: 1.3rem;
   font-weight: 400;
@@ -31,8 +46,12 @@ const logo = css`
     margin: 0;
   }
 `;
+const logoImage = css`
+  border-radius: 100%;
+`;
 const menu = css`
   flex: 1;
+  font-weight: 700;
   text-align: right;
   display: flex;
   overflow-x: auto;
@@ -59,10 +78,6 @@ const themeIcon = css`
   .dark-inline-block {
     display: none;
   }
-`;
-
-const link = css`
-  margin-right: 20px;
 `;
 
 const moreMenuWrapper = css`
@@ -127,42 +142,29 @@ const query = graphql`
   }
 `;
 
-const fixedStyle = {
-  position: 'fixed',
-  width: '100%',
-  top: 0,
-  left: 0,
-  padding: '0 5% 0 5%',
-  zIndex: 10,
-  backgroundColor: 'var(--bg)',
-  boxShadow: 'rgba(0, 0, 0, 0.08) 0px 0px 8px',
-};
-
 const Menus = [
   {
-    label: 'Blog',
+    label: 'BLOG',
     to: '/blog',
   },
   {
-    label: 'Categories',
+    label: 'CATEGORIES',
     to: '/categories',
   },
   {
-    label: 'Tags',
+    label: 'TAGS',
     to: '/tags',
   },
   {
-    label: 'About',
+    label: 'ABOUT',
     to: '/about',
   },
 ];
 
 const Header = () => {
   const [openSearch, setOpenSearch] = useState(false);
-  const [overHeight, setOverHeight] = useState(false);
-  const [fixHeader, setFixHeader] = useState(false);
+  const [isScrollTop, setIsScrollTop] = useState(true);
   const [showMoreMenu, setShowMoreMenu] = useState(false);
-  const prevScroll = useRef();
   const $moreMenu = useRef();
   const handleOpenSearch = () => setOpenSearch(true);
   const handleCloseSearch = () => setOpenSearch(false);
@@ -176,10 +178,7 @@ const Header = () => {
   };
 
   const handleScroll = () => {
-    const isOverHeight = window.scrollY > HEADER_HEIGHT;
-    setOverHeight(isOverHeight);
-    setFixHeader(prevScroll.current > window.scrollY);
-    prevScroll.current = window.scrollY;
+    setIsScrollTop(window.scrollY <= 0);
   };
 
   useEventListener('scroll', handleScroll, { passive: true });
@@ -210,89 +209,89 @@ const Header = () => {
     <>
       <StaticQuery
         query={query}
-        render={(data) => {
-          const { siteMetadata } = data.site;
-          const { title } = siteMetadata;
-
+        render={() => {
           return (
-            <div
-              css={header}
-              style={
-                overHeight
-                  ? { ...fixedStyle, marginTop: fixHeader ? 0 : -HEADER_HEIGHT }
-                  : undefined
-              }
-            >
-              <div css={logo}>
-                <CustomLink to="/" css={link}>
-                  {title}
-                </CustomLink>
-              </div>
-              <div css={menu}>
-                {Menus.map(({ label, to }) => (
-                  <CustomLink key={to} to={to} css={link}>
-                    {label}
+            <div css={fixedHeader(isScrollTop)}>
+              <div css={header}>
+                <div css={logo}>
+                  <CustomLink to="/" css={link}>
+                    <StaticImage
+                      width={40}
+                      height={40}
+                      layout="fixed"
+                      src="../images/me.webp"
+                      alt="logo"
+                      css={logoImage}
+                      loading="eager"
+                    />
                   </CustomLink>
-                ))}
-              </div>
-              <button css={icon} onClick={handleOpenSearch}>
-                <Blind>검색</Blind>
-                <MdSearch />
-              </button>
-              <ThemeToggler>
-                {({ theme, toggleTheme }) => {
-                  const nextTheme = theme === 'dark' ? 'light' : 'dark';
-                  return (
-                    <button css={themeIcon} onClick={() => toggleTheme(nextTheme)}>
-                      {isMounted && <Blind>{nextTheme}로 변경</Blind>}
-                      <MdLightMode className="dark-inline-block" />
-                      <MdDarkMode className="dark-hidden" />
-                    </button>
-                  );
-                }}
-              </ThemeToggler>
-              <div css={moreMenuWrapper}>
-                <button
-                  id="moremenu_button"
-                  css={icon}
-                  onClick={() => setShowMoreMenu(true)}
-                  aria-haspopup={true}
-                  aria-controls="navigation_moremenu"
-                  aria-expanded={showMoreMenu}
-                >
-                  <Blind>네비게이션</Blind>
-                  <MdMoreVert />
+                </div>
+                <div css={menu}>
+                  {Menus.map(({ label, to }) => (
+                    <CustomLink key={to} to={to} css={link}>
+                      {label}
+                    </CustomLink>
+                  ))}
+                </div>
+                <button css={icon} onClick={handleOpenSearch}>
+                  <Blind>검색</Blind>
+                  <MdSearch />
                 </button>
-                {showMoreMenu && (
-                  <>
-                    <div css={dimmed} />
-                    <ul
-                      id="navigation_moremenu"
-                      css={moreMenu}
-                      ref={$moreMenu}
-                      aria-labelledby="moremenu_button"
-                    >
-                      <button css={moreMenuClose} onClick={() => setShowMoreMenu(false)}>
-                        <Blind>닫기</Blind>
-                        <MdClose />
+                <ThemeToggler>
+                  {({ theme, toggleTheme }) => {
+                    const nextTheme = theme === 'dark' ? 'light' : 'dark';
+                    return (
+                      <button css={themeIcon} onClick={() => toggleTheme(nextTheme)}>
+                        {isMounted && <Blind>{nextTheme}로 변경</Blind>}
+                        <MdLightMode className="dark-inline-block" />
+                        <MdDarkMode className="dark-hidden" />
                       </button>
-                      {Menus.map(({ label, to }, i) => (
-                        <li key={to} css={moreMenuItem}>
-                          <CustomLink role="menuitem" to={to} css={link}>
-                            {label}
-                          </CustomLink>
-                        </li>
-                      ))}
-                    </ul>
-                  </>
-                )}
+                    );
+                  }}
+                </ThemeToggler>
+                <div css={moreMenuWrapper}>
+                  <button
+                    id="moremenu_button"
+                    css={icon}
+                    onClick={() => setShowMoreMenu(true)}
+                    aria-haspopup={true}
+                    aria-controls="navigation_moremenu"
+                    aria-expanded={showMoreMenu}
+                  >
+                    <Blind>네비게이션</Blind>
+                    <MdMoreVert />
+                  </button>
+                  {showMoreMenu && (
+                    <>
+                      <div css={dimmed} />
+                      <ul
+                        id="navigation_moremenu"
+                        css={moreMenu}
+                        ref={$moreMenu}
+                        aria-labelledby="moremenu_button"
+                      >
+                        <button css={moreMenuClose} onClick={() => setShowMoreMenu(false)}>
+                          <Blind>닫기</Blind>
+                          <MdClose />
+                        </button>
+                        {Menus.map(({ label, to }, i) => (
+                          <li key={to} css={moreMenuItem}>
+                            <CustomLink role="menuitem" to={to} css={link}>
+                              {label}
+                            </CustomLink>
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+                </div>
+                <Search open={openSearch} handleClose={handleCloseSearch} />
               </div>
-              <Search open={openSearch} handleClose={handleCloseSearch} />
             </div>
           );
         }}
       />
-      {overHeight && <div style={{ ...fixedStyle, position: 'relative', height: HEADER_HEIGHT }} />}
+      {<div style={{ position: 'relative', height: HEADER_HEIGHT }} />}
     </>
   );
 };
