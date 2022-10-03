@@ -32,6 +32,8 @@ const linkContainer = css`
   text-align: center;
 `;
 
+console.log('HELLO WORLD');
+
 const Home = ({ data }) => {
   const { edges: postEdges } = data.posts;
   // const { edges: projectEdges } = data.projects;
