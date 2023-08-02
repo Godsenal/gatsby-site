@@ -41,7 +41,7 @@
     "gatsby-transformer-remark": "^5.9.1",
     "gatsby-transformer-sharp": "^4.16.0",
     "gray-matter": "^4.0.3",
-    "inquirer": "^8.2.1",
+    "inquirer": "^8.2.6",
     "inquirer-autocomplete-prompt": "^1.4.0",
     "lodash": "^4.17.21",
     "ora": "^5.4.1",
