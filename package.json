@@ -16,8 +16,8 @@
   },
   "dependencies": {
     "@emotion/core": "^11.0.0",
-    "@emotion/react": "^11.9.0",
-    "@emotion/styled": "^11.8.1",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.0",
     "algoliasearch": "^4.12.2",
     "body-scroll-lock": "^3.1.5",
     "chalk": "^4.1.2",
