@@ -43,7 +43,7 @@
     "gray-matter": "^4.0.3",
     "inquirer": "^8.2.1",
     "inquirer-autocomplete-prompt": "^1.4.0",
-    "lodash": "^4.17.21",
+    "lodash": "^4.17.23",
     "ora": "^5.4.1",
     "prismjs": "^1.27.0",
     "react": "^17.0.2",
